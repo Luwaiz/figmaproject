@@ -1,21 +1,20 @@
 import { StatusBar } from "react-native";
 import { StyleSheet,View,TouchableOpacity,Image,Text,TextInput} from "react-native";
 import React,{useState} from "react";
-const Signup=({navigation})=>{
+
+const Login=({navigation})=>{
     
-    const NavigateToLogin=()=>{
-        navigation.navigate('Login')
+    const NavigateToLandingPage=()=>{
+        navigation.navigate('LandingPage')
     }
     return(
     <View style={styles.container}>
         <View style={styles.Circle1}><Text>Sign up</Text></View>
         <View style={styles.mainbody}>
-       <View style={styles.pace}><TextInput style={styles.input1} placeholder="Email" placeholderTextColor={"#635D5D"} cursorColor={"black"}></TextInput></View>
        <View style={styles.pace}><TextInput style={styles.input1} placeholder="Username" placeholderTextColor={"#635D5D"}></TextInput></View>
        <View style={styles.pace}><TextInput style={styles.input1} placeholder="Password" placeholderTextColor={"#635D5D"}></TextInput></View>
-       <View style={styles.pace}><TextInput style={styles.input1} placeholder="Confirm Password" placeholderTextColor={"#635D5D"}></TextInput></View>
-        <Text style={styles.dont}>Already have an account?<Text style={styles.login}> Log in</Text></Text>
-        <TouchableOpacity style={styles.button} onPress={NavigateToLogin}><Text style={styles.btntxt}>Sign up</Text></TouchableOpacity>
+        <Text style={styles.dont}>Don't have an account?<Text style={styles.login}> Log in</Text></Text>
+        <TouchableOpacity style={styles.button} onPress={NavigateToLandingPage}><Text style={styles.btntxt}>Log in</Text></TouchableOpacity>
         </View>
     </View>
 )}
@@ -46,7 +45,7 @@ const styles=StyleSheet.create({
         paddingBottom:20
     },
     dont:{
-        paddingTop:40,
+        paddingTop:140,
     
     },
     mainbody:{
@@ -63,7 +62,7 @@ const styles=StyleSheet.create({
         borderRadius:30,
         borderWidth:1,
         borderColor:"black",
-        bottom:-80
+        bottom:-125
     },
     btntxt:{
         position:"absolute",
@@ -74,4 +73,4 @@ const styles=StyleSheet.create({
         paddingHorizontal:75
     }
 
-});export default Signup;
+});export default Login;
