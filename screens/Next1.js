@@ -14,7 +14,7 @@ const Next1 = ({ navigation }) => {
   const [Subtext2, setSubtext2] = useState("or just by scanning our QR code");
   // const [Imagery,setImagery]=useState(require("./assets/noodles.png"))
   const [Spacer1, setSpacer1] = useState({ top: 40, left: -220 });
-  const [Spacer2, setSpacer2] = useState({ bottom: 190, right: -170 });
+  const [Spacer2, setSpacer2] = useState({ bottom: 190, right: -150 });
   return (
     <View style={styles.container}>
       <View style={[styles.circle1, { ...Spacer1}]}></View>
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   mainbody: {
     justifyContent: "center",
     alignItems: "center",
-    top: 530,
+    top: 580,
   },
   button: {
     backgroundColor: "#470440",
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 155,
   },
   widget: {
-    paddingTop: 20,
+    paddingTop: 50,
     display: "flex",
     height: 20,
     width: 45,
@@ -109,14 +109,14 @@ const styles = StyleSheet.create({
   },
   Widget1: {
     height: 8,
-    width: 22,
-    backgroundColor: "#470440",
+    width: 8,
+    backgroundColor: "grey",
     borderRadius: 15,
   },
   widget2: {
     height: 8,
-    width: 8,
-    backgroundColor: "grey",
+    width: 22,
+    backgroundColor: "#470440",
     borderRadius: 15,
   },
   widget3: {

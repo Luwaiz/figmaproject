@@ -10,7 +10,7 @@ const Home = ({ navigation }) => {
   const [Subtext2, setSubtext2] = useState("watering dishes");
   //const [Imagery,setImagery]=useState(require("./assets/noodles.png"))
   const [Spacer1, setSpacer1] = useState({ top: 40, right: -220 });
-  const [Spacer2, setSpacer2] = useState({ bottom: 190, left: -170 });
+  const [Spacer2, setSpacer2] = useState({ bottom: 190, left: -150 });
   return (
     <View style={styles.container}>
       <View style={[styles.circle1, { ...Spacer1 }]}></View>
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   mainbody: {
     justifyContent: "center",
     alignItems: "center",
-    top: 530,
+    top: 580,
   },
   button: {
     backgroundColor: "#470440",
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     borderWidth: 1,
     borderColor: "black",
-    bottom: -30,
+    bottom:-30
   },
   buttontxt: {
     position: "absolute",
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 155,
   },
   widget: {
-    paddingTop: 20,
+    paddingTop: 50,
     display: "flex",
     height: 20,
     width: 45,
