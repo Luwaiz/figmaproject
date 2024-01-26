@@ -6,16 +6,16 @@ import {
   Image,
   Text,
   TextInput,
+  ScrollView
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import React, { useState } from "react";
+import VSlider from "../component/vslider";
+import HSlider from "../component/HSlider";
 
 const LandingPage = ({ route }) => {
   const { Username1 } = route.params;
-  const [Percentage, setPercentage] = useState(
-    "Get 50% off on these new menus"
-  );
   return (
     <View style={styles.container}>
       <View style={styles.heading}>
@@ -27,7 +27,10 @@ const LandingPage = ({ route }) => {
             color="#470440"
             style={styles.notify}
           />
-          <View style={styles.profile}></View>
+          <Image
+            style={styles.profile}
+            source={require("../assets/pancake.jpg")}
+          ></Image>
         </View>
       </View>
       <View style={styles.inputContainer}>
@@ -44,26 +47,15 @@ const LandingPage = ({ route }) => {
           style={styles.searchIcon}
         />
       </View>
-      <View style={styles.hSliderCont}>
-        <Text>{Percentage}</Text>
-        <View style={styles.hSlider}>
-          <Image
-            source={require("../assets/pancake.jpg")}
-            style={styles.Imagery}
-            resizeMode="cover"
-          /><Text style={styles.Txt}>Blueberry {"\n"}pancakes</Text>
-        </View>
+      <View>
+        <HSlider />
       </View>
-      <View><Text>Categories</Text><View><View style={styles.hSliderCont}>
-        <Text>{Percentage}</Text>
-        <View style={styles.hSlider}>
-          <Image
-            source={require("../assets/pancake.jpg")}
-            style={styles.Imagery}
-            resizeMode="cover"
-          /><Text style={styles.Txt}>Blueberry {"\n"}pancakes</Text>
-        </View>
-      </View></View></View>
+      <ScrollView>
+        <VSlider />
+        <VSlider />
+        <VSlider />
+        <VSlider />
+      </ScrollView>
     </View>
   );
 };
@@ -72,11 +64,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    flexDirection:"column"
   },
   heading: {
-    // backgroundColor:"blue",
-    top: 40,
+    marginTop: 40,
     width: "100%",
     height: 50,
     paddingHorizontal: 16,
@@ -92,7 +82,8 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: "#470440",
+    borderColor: "#470440",
+    borderWidth: 3,
   },
   profNotify: {
     flexDirection: "row",
@@ -103,7 +94,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flexDirection: "row",
-    top: 50,
+    marginTop: 10,
     alignItems: "center",
     backgroundColor: "#D9D9D9",
     borderRadius: 25,
@@ -117,33 +108,7 @@ const styles = StyleSheet.create({
   },
   searchIcon: {
     position: "absolute",
-    right:15
+    right: 15,
   },
-  hSliderCont: {
-    top: 90,
-  },
-  Imagery: {
-    height:100,
-    width:276,
-    borderTopRightRadius:50,
-    borderBottomRightRadius:50,
-    borderBottomLeftRadius:16,
-    borderTopLeftRadius:16,
-    borderWidth:2,
-    borderColor:"black"
-  },
-  hSlider:{
-    borderRadius:16,
-    backgroundColor:"#470440",
-    marginTop:5,
-    flexDirection:"row",
-    height:100,
-    width:350,
-  },
-  Txt:{
-    marginLeft:5,
-    color:"white",
-    marginVertical:30
-  }
 });
 export default LandingPage;
