@@ -6,16 +6,15 @@ import {
   Image,
   Text,
   TextInput,
+  ScrollView
 } from "react-native";
 import React, { useState } from "react";
 
+
 const HSlider = () => {
-    const [Percentage, setPercentage] = useState(
-        "Get 50% off on these new menus"
-      );
   return (
     <View style={styles.hSliderCont}>
-    <Text>{Percentage}</Text>
+    
     <View style={styles.hSlider}>
       <Image
         source={require("../assets/pancake.jpg")}
@@ -23,14 +22,15 @@ const HSlider = () => {
         resizeMode="cover"
       /><Text style={styles.Txt}>Blueberry {"\n"}pancakes</Text>
     </View>
-    <Text style={styles.categoryTxt}>Categories</Text>
   </View>
   )
 }
 
 const styles = StyleSheet.create({
     hSliderCont: {
-        marginTop: 35,
+        marginTop: 4,
+        marginHorizontal:16,
+        marginBottom:80
       },
       Imagery: {
         height:100,
@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
       hSlider:{
         borderRadius:16,
         backgroundColor:"#470440",
-        marginTop:5,
         flexDirection:"row",
         height:100,
         width:350,
@@ -56,11 +55,7 @@ const styles = StyleSheet.create({
         color:"white",
         marginVertical:30
       },
-      categoryTxt:{
-        paddingTop:10,
-        fontWeight:"bold",
-        fontSize:25
-      },
+     
 })
 export default HSlider
 

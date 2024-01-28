@@ -1,8 +1,12 @@
 import { StatusBar } from "react-native";
 import { StyleSheet, View, TouchableOpacity, Image, Text } from "react-native";
 import React, { useState } from "react";
+import Buttons from "../component/Buttons";
 
 const Home = ({ navigation }) => {
+  const NavigateToNext1=()=>{
+    navigation.navigate("Next1")
+  }
   const [Header, setHeader] = useState("Order Food");
   const [Subtext1, setSubtext1] = useState(
     "Place your order for exquisite menus and mouth"
@@ -23,13 +27,8 @@ const Home = ({ navigation }) => {
           <View style={styles.widget2}></View>
           <View style={styles.widget3}></View>
         </View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Next1")}
-        >
-          <Text style={styles.buttontxt}>Next</Text>
-        </TouchableOpacity>
       </View>
+      <Buttons Btn={"Next"} onPress={NavigateToNext1} width={350}/>
       <View style={[styles.circle2, { ...Spacer2 }]}></View>
       <StatusBar style="auto" />
     </View>
@@ -79,23 +78,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     top: 580,
-  },
-  button: {
-    backgroundColor: "#470440",
-    height: 58,
-    width: 350,
-    borderRadius: 30,
-    borderWidth: 1,
-    borderColor: "black",
-    bottom:-30
-  },
-  buttontxt: {
-    position: "absolute",
-    //justifyContent:"center",
-    // alignItems: "center",
-    color: "white",
-    paddingVertical: 18,
-    paddingHorizontal: 155,
   },
   widget: {
     paddingTop: 50,

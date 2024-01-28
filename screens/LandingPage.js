@@ -10,12 +10,18 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
+import { FontAwesome5 } from '@expo/vector-icons';
+import { Foundation } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import React, { useState } from "react";
 import VSlider from "../component/vslider";
 import HSlider from "../component/HSlider";
 
 const LandingPage = ({ route }) => {
   const { Username1 } = route.params;
+  const [Percentage, setPercentage] = useState(
+    "Get 50% off on these new menus"
+  );
   return (
     <View style={styles.container}>
       <View style={styles.heading}>
@@ -47,22 +53,33 @@ const LandingPage = ({ route }) => {
           style={styles.searchIcon}
         />
       </View>
-      <View>
+      <Text style={styles.Percent}>{Percentage}</Text>
+      <ScrollView horizontal={true} >
         <HSlider />
-      </View>
+        <HSlider />
+        <HSlider />
+      </ScrollView>
+      <View style={styles.categoryCont}><Text style={styles.categoryTxt}>Categories</Text></View>
       <ScrollView>
         <VSlider />
         <VSlider />
         <VSlider />
         <VSlider />
       </ScrollView>
+      <View style={styles.Taskbar}>
+      <Ionicons name="person-sharp" size={24} color="white" />
+      <Fontisto name="search" size={24} color="white" />
+      <MaterialCommunityIcons name="home-outline" size={35} color="white" />
+      <FontAwesome5 name="shopping-cart" size={23} color="white" />
+      <Foundation name="list" size={25} color="white" />
+      </View>
     </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#ffff",
     alignItems: "center",
   },
   heading: {
@@ -110,5 +127,29 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 15,
   },
+  categoryTxt:{
+    fontWeight:"bold",
+    fontSize:25,
+  },
+  categoryCont:{
+    paddingVertical:15,
+    paddingRight:240
+  },
+  Percent:{
+    paddingTop:40,
+    marginLeft:-140
+  },
+  Taskbar:{
+    width:380,
+    height:54,
+    backgroundColor:"#470440",
+    position:"absolute",
+    bottom:3,
+    borderRadius:24,
+    flexDirection:"row",
+    justifyContent:"space-around",
+    alignContent:"center",
+    alignItems:"center"
+  }
 });
 export default LandingPage;

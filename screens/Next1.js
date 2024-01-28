@@ -1,7 +1,8 @@
 import { StatusBar } from "react-native";
 import { StyleSheet, View, TouchableOpacity, Image, Text } from "react-native";
 import React, { useState } from "react";
-import { FontAwesome5 } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import Buttons from "../component/Buttons";
 
 const Next1 = ({ navigation }) => {
   const NavigateToNext2 = () => {
@@ -18,7 +19,7 @@ const Next1 = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={[styles.circle1, { ...Spacer1}]}></View>
-      <TouchableOpacity onPress={()=>navigation.goBack()} style={styles.backBtn}><FontAwesome5 name="arrow-circle-left" size={44} color="white" /></TouchableOpacity>
+      <TouchableOpacity onPress={()=>navigation.goBack()} style={styles.backBtn}><Ionicons name="arrow-back-circle-outline" size={50} color="white" /></TouchableOpacity>
       <View style={styles.mainbody}>
         <Text style={styles.text1}>{Header}</Text>
         <Text style={styles.text2}>{Subtext1} </Text>
@@ -28,10 +29,8 @@ const Next1 = ({ navigation }) => {
           <View style={styles.widget2}></View>
           <View style={styles.widget3}></View>
         </View>
-        <TouchableOpacity style={styles.button} onPress={NavigateToNext2}>
-          <Text style={styles.buttontxt}>Next</Text>
-        </TouchableOpacity>
       </View>
+      <Buttons Btn={"Next"} onPress={NavigateToNext2} width={350}/>
       <View style={[styles.circle2, { ...Spacer2 }]}></View>
       <StatusBar style="auto" />
     </View>
@@ -82,23 +81,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     top: 580,
   },
-  button: {
-    backgroundColor: "#470440",
-    height: 58,
-    width: 350,
-    borderRadius: 30,
-    borderWidth: 1,
-    borderColor: "black",
-    bottom: -30,
-  },
-  buttontxt: {
-    position: "absolute",
-    //justifyContent:"center",
-    // alignItems: "center",
-    color: "white",
-    paddingVertical: 18,
-    paddingHorizontal: 155,
-  },
   widget: {
     paddingTop: 50,
     display: "flex",
@@ -127,8 +109,8 @@ const styles = StyleSheet.create({
   },
   backBtn:{
     position: "absolute",
-    top: 70,
-    left:20
+    marginTop:70,
+    left:6
   }
 });
 export default Next1;
