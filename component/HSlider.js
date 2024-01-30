@@ -11,16 +11,17 @@ import {
 import React, { useState } from "react";
 
 
-const HSlider = () => {
+const HSlider = ({PromoName,VImage,...props}) => {
   return (
     <View style={styles.hSliderCont}>
     
     <View style={styles.hSlider}>
       <Image
-        source={require("../assets/pancake.jpg")}
+        source={VImage}
         style={styles.Imagery}
         resizeMode="cover"
-      /><Text style={styles.Txt}>Blueberry {"\n"}pancakes</Text>
+        {...props}
+      /><View style={{height:100, width:70}}><Text style={styles.Txt}>{PromoName}</Text></View>
     </View>
   </View>
   )

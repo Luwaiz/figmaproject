@@ -19,7 +19,7 @@ const Next1 = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={[styles.circle1, { ...Spacer1}]}></View>
-      <TouchableOpacity onPress={()=>navigation.goBack()} style={styles.backBtn}><Ionicons name="arrow-back-circle-outline" size={50} color="white" /></TouchableOpacity>
+      <TouchableOpacity onPress={()=>navigation.goBack()} style={styles.backBtn}><Ionicons name="arrow-back-circle-outline" size={40} color="black" /></TouchableOpacity>
       <View style={styles.mainbody}>
         <Text style={styles.text1}>{Header}</Text>
         <Text style={styles.text2}>{Subtext1} </Text>
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   },
   backBtn:{
     position: "absolute",
-    marginTop:70,
+    marginTop:40,
     left:6
   }
 });

@@ -2,23 +2,24 @@ import { StyleSheet, View, TouchableOpacity, Image, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
-import React from "react";
+import React,{useState} from "react";
 
-const VSlider = () => {
+const VSlider = ({CatName,CatImage,...props}) => {
   const navigation=useNavigation();
   const NavigateToFoodPage = () => {
-    navigation.navigate("FoodPage");
+    navigation.navigate("FoodPage",{CatImage,CatName});
   };
   return (
     <View style={styles.VSliderCont}>
       <View style={styles.VSlider}>
         <Image
-          source={require("../assets/Ice-cream.jpg")}
+          source={CatImage}
           style={styles.Imaging}
           resizeMode="cover"
+          {...props}
         />
         <View style={styles.description}>
-          <Text style={styles.descriptionTxt}>Desserts</Text>
+          <Text style={styles.descriptionTxt}>{CatName}</Text>
           <TouchableOpacity onPress={NavigateToFoodPage}>
             <Ionicons
               name="chevron-forward-circle-sharp"

@@ -1,7 +1,7 @@
 import { StatusBar } from "react-native";
 import { StyleSheet, View, TouchableOpacity, Image, Text } from "react-native";
 import React, { useState } from "react";
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from "@expo/vector-icons";
 import Buttons from "../component/Buttons";
 
 const Next2 = ({ navigation }) => {
@@ -19,7 +19,12 @@ const Next2 = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={[styles.circle1, { ...Spacer1 }]}></View>
-      <TouchableOpacity onPress={()=>navigation.goBack()} style={styles.backBtn}><Ionicons name="arrow-back-circle-outline" size={50} color="black" /></TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        style={styles.backBtn}
+      >
+        <Ionicons name="arrow-back-circle-outline" size={40} color="black" />
+      </TouchableOpacity>
       <View style={styles.mainbody}>
         <Text style={styles.text1}>{Header}</Text>
         <Text style={styles.text2}>{Subtext1} </Text>
@@ -30,7 +35,7 @@ const Next2 = ({ navigation }) => {
           <View style={styles.widget3}></View>
         </View>
       </View>
-      <Buttons Btn={"Next"} onPress={NavigateToSignup} width={350}/>
+      <Buttons Btn={"Next"} onPress={NavigateToSignup} width={350} />
       <View style={[styles.circle2, { ...Spacer2 }]}></View>
       <StatusBar style="auto" />
     </View>
@@ -107,10 +112,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#470440",
     borderRadius: 15,
   },
-  backBtn:{
+  backBtn: {
     position: "absolute",
-    marginTop:70,
-    left:6
-  }
+    marginTop: 40,
+    left: 6,
+  },
 });
 export default Next2;

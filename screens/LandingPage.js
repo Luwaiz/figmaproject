@@ -6,18 +6,24 @@ import {
   Image,
   Text,
   TextInput,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
-import { FontAwesome5 } from '@expo/vector-icons';
-import { Foundation } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome5 } from "@expo/vector-icons";
+import { Foundation } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import VSlider from "../component/vslider";
 import HSlider from "../component/HSlider";
+import { useNavigation } from "@react-navigation/native";
 
-const LandingPage = ({ route }) => {
+const LandingPage = ({ route, CatImage, CatName, ...props }) => {
+  const navigation=useNavigation()
+  const Profile=(require("../assets/blue-pancake.jpg"))
+  const NavigateToProfilePage = () => {
+    navigation.navigate("ProfilePage",{Profile});
+  };
   const { Username1 } = route.params;
   const [Percentage, setPercentage] = useState(
     "Get 50% off on these new menus"
@@ -35,7 +41,7 @@ const LandingPage = ({ route }) => {
           />
           <Image
             style={styles.profile}
-            source={require("../assets/pancake.jpg")}
+            source={Profile}
           ></Image>
         </View>
       </View>
@@ -54,24 +60,53 @@ const LandingPage = ({ route }) => {
         />
       </View>
       <Text style={styles.Percent}>{Percentage}</Text>
-      <ScrollView horizontal={true} >
-        <HSlider />
-        <HSlider />
-        <HSlider />
+      <ScrollView horizontal={true}>
+        <HSlider
+          PromoName={"Blueberry Pancakes"}
+          VImage={require("../assets/blue-pancake.jpg")}
+        />
+        <HSlider
+          PromoName={"Raspberry Pancakes"}
+          VImage={require("../assets/rasp-pancake.jpg")}
+        />
+        <HSlider
+          PromoName={"Cream Coffee"}
+          VImage={require("../assets/coffee.jpg")}
+        />
       </ScrollView>
-      <View style={styles.categoryCont}><Text style={styles.categoryTxt}>Categories</Text></View>
-      <ScrollView>
-        <VSlider />
-        <VSlider />
-        <VSlider />
-        <VSlider />
+      <View style={styles.categoryCont}>
+        <Text style={styles.categoryTxt}>Categories</Text>
+      </View>
+      <ScrollView style={{ marginBottom: 40 }}>
+        <VSlider
+          CatImage={require("../assets/Ice-cream.jpg")}
+          CatName={"Desserts"}
+          {...props}
+        />
+        <VSlider
+          CatImage={require("../assets/continental.jpg")}
+          CatName={"Main Dishes"}
+          {...props}
+        />
+        <VSlider
+          CatImage={require("../assets/cocktails.jpg")}
+          CatName={"Cocktails"}
+          {...props}
+        />
+        <VSlider
+          CatImage={require("../assets/blue-pancake.jpg")}
+          CatName={"Others"}
+          {...props}
+        />
       </ScrollView>
       <View style={styles.Taskbar}>
-      <Ionicons name="person-sharp" size={24} color="white" />
-      <Fontisto name="search" size={24} color="white" />
-      <MaterialCommunityIcons name="home-outline" size={35} color="white" />
-      <FontAwesome5 name="shopping-cart" size={23} color="white" />
-      <Foundation name="list" size={25} color="white" />
+        <TouchableOpacity onPress={NavigateToProfilePage}>
+          <Ionicons name="person-sharp" size={24} color="white" />
+        </TouchableOpacity>
+        <Fontisto name="search" size={24} color="white" />
+        <MaterialCommunityIcons name="home-outline" size={35} color="white" />
+        <FontAwesome5 name="shopping-cart" size={23} color="white" />
+        <Foundation name="list" size={25} color="white" />
       </View>
     </View>
   );
@@ -127,29 +162,29 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 15,
   },
-  categoryTxt:{
-    fontWeight:"bold",
-    fontSize:25,
+  categoryTxt: {
+    fontWeight: "bold",
+    fontSize: 25,
   },
-  categoryCont:{
-    paddingVertical:15,
-    paddingRight:240
+  categoryCont: {
+    paddingVertical: 15,
+    paddingRight: 240,
   },
-  Percent:{
-    paddingTop:40,
-    marginLeft:-140
+  Percent: {
+    paddingTop: 40,
+    marginLeft: -140,
   },
-  Taskbar:{
-    width:380,
-    height:54,
-    backgroundColor:"#470440",
-    position:"absolute",
-    bottom:3,
-    borderRadius:24,
-    flexDirection:"row",
-    justifyContent:"space-around",
-    alignContent:"center",
-    alignItems:"center"
-  }
+  Taskbar: {
+    width: 380,
+    height: 54,
+    backgroundColor: "#470440",
+    position: "absolute",
+    bottom: 3,
+    borderRadius: 24,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignContent: "center",
+    alignItems: "center",
+  },
 });
 export default LandingPage;

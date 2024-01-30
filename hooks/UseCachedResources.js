@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text} from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
 import * as Font from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'

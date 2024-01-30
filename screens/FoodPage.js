@@ -5,7 +5,9 @@ import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import Products from "../component/Products";
 
-const FoodPage = () => {
+const FoodPage = ({route}) => {
+
+  const {CatImage,CatName}=route.params;
   const navigation = useNavigation();
   const [Favorite, setFavorite] = useState("favorite-outline");
   const [FavoriteColor, setNotFavoriteColor] = useState("black");
@@ -20,7 +22,6 @@ const FoodPage = () => {
       <View style={styles.topContainer}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
-          style={styles.backBtn}
         >
           <Ionicons name="arrow-back-circle-outline" size={40} color="black" />
         </TouchableOpacity>
@@ -36,13 +37,17 @@ const FoodPage = () => {
       <View>
         <Image
           style={styles.HeadImage}
-          source={require("../assets/Ice-cream.jpg")}
+          source={CatImage}
         />
         <View style={styles.ImageDescription}>
-          <Text style={styles.ImageTxt}>Desserts</Text>
+          <Text style={styles.ImageTxt}>{CatName}</Text>
         </View>
       </View>
       <ScrollView>
+       <View style={{ flexDirection: "row" }}>
+          <Products ProductId ProductImagery ProductName/>
+          <Products />
+         </View>
         <View style={{ flexDirection: "row" }}>
           <Products />
           <Products />
@@ -53,12 +58,8 @@ const FoodPage = () => {
         </View>
         <View style={{ flexDirection: "row" }}>
           <Products />
-          <Products />
-        </View>
-        <View style={{ flexDirection: "row" }}>
-          <Products />
-          <Products />
-        </View>
+          <Products /> 
+        </View> 
       </ScrollView>
     </View>
   );
@@ -88,7 +89,8 @@ const styles = StyleSheet.create({
   },
   ImageDescription: {
     alignItems: "center",
-    width: 150,
+    maxWidth: 300,
+    paddingHorizontal:10,
     backgroundColor: "white",
     alignSelf: "center",
     height: 40,

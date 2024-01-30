@@ -1,17 +1,19 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
-import React, { useState } from "react";
+import { StyleSheet, Text, View, TouchableOpacity, Image,ActivityIndicator } from "react-native";
+import React, { useState,useEffect } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+
 
 const Products = () => {
   return (
     <View style={styles.Product}>
-          <Image
-            style={styles.ProductImage}
-            source={require("../assets/Ice-cream.jpg")}
+        <View>
+        <Image
+            style={styles.ProductImagery}
+            source={require("../assets/images/close-up-delicious-chocolate-cupcakes-with-raspberry.jpg")}
           ></Image>
           <View style={styles.innerProduct}>
-            <Text style={styles.productName}>Blueberry{"\n"}Pancakes</Text>
+            <Text style={styles.productName}> foodie</Text>
             <View style={{ alignItems: "center" }}>
               <View style={styles.price}>
                 <Text style={{ color: "white", alignSelf: "center" }}>
@@ -37,9 +39,12 @@ const Products = () => {
               </View>
             </View>
           </View>
-        </View>
-  )
-}
+          </View>
+    
+    </View>
+    );};
+  
+
 
 const styles = StyleSheet.create({
     Product: {
@@ -63,7 +68,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     paddingTop: 5,
   },
-  ProductImage: {
+  ProductImagery: {
     height: 110,
     width: 110,
     borderRadius: 60,
@@ -83,6 +88,7 @@ const styles = StyleSheet.create({
   },
   productName: {
     paddingTop: 15,
+    height:200
   },
   quantity: {
     borderColor: "black",
