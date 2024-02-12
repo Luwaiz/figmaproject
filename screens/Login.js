@@ -6,25 +6,59 @@ import {
   Image,
   Text,
   TextInput,
+  Keyboard
 } from "react-native";
 import TextInputBox from "../component/TextInputBox";
 import Buttons from "../component/Buttons";
-import React, { useState } from "react";
+import { auths } from "../hooks/firbaseConfig";
+import React, { useState, useContext } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import axios from "axios";
+import API from "../constant/API";
+import Context from "../hooks/provider";
 
 const Login = ({ navigation, route, }) => {
-  const NavigateToLandingPage = () => {
-    if (Username1 === Username2 && Password === Password2) {
-      navigation.navigate("LandingPage", { Username1 });
-    }
-     else if (Username2 === '' && Password2 === '') {
-       //navigation.goBack;
-       alert("Fill in your details");
-     } 
-    else {
-      alert("Incorrect Password or Username");
+  const context=useContext(Context)
+  const auth=auths;
+  const [loading, setLoading] = useState(false);
+  const { Username1, Email, ConPassword,Btn="Log in" } = route.params;
+  const NavigateToLandingPage = async() => {
+    // if (Username1 === Username2 && Password === Password2) {
+    //   navigation.navigate("LandingPage", { Email,Username1,Password});
+    // }
+    //  else if (Username2 === '' && Password2 === '') {
+    //    //navigation.goBack;
+    //    alert("Fill in your details");
+    //  } 
+    // else {
+    //   alert("Incorrect Password or Username");
+    // }
+
+    
+    Keyboard.dismiss()
+    setLoading(true)
+    try{
+      const req = {
+        email:Username2.trim(),
+        password:Password2
+      }
+      // const response=await signInWithEmailAndPassword(auth,Username2,Password2)
+      // console.log(response)
+      // navigation.navigate("LandingPage", { Email, Username1, ConPassword });
+
+      const response= await axios.post(API.log_in, req)
+      console.log(response.data.result)
+      context.setToken(response.data.result.access_token)
+      navigation.navigate("LandingPage", { Email, Username2, Password2 });
+    }catch(e){
+      console.log(e)
+      alert("Sign up failed: " + e.message)
+      setLoading(false)
+    }finally{
+      setLoading(false)
     }
   };
-  const { Username1, Email, Password,Btn="Log in" } = route.params;
+  
   const [Password2, setPassword2] = useState("");
   const [Username2, setUsername2] = useState("");
   const [Spacer2, setSpacer2] = useState({ bottom: 170, right: -150 });
@@ -36,7 +70,7 @@ const Login = ({ navigation, route, }) => {
       </View>
       <View style={styles.mainBody}>
         <TextInputBox
-          placeholder="Username"
+          placeholder="Email"
           onChangeText={(text) => setUsername2(text)}
           keyboardType="default"
         />
@@ -53,7 +87,12 @@ const Login = ({ navigation, route, }) => {
         </Text>
         
       </View>
-      <Buttons onPress={NavigateToLandingPage} Btn="Log in" width={200}/>
+      <Buttons onPress={NavigateToLandingPage} Btn="Log in" 
+      disabled={loading || Username2 === "" ||
+      Password2 === "" 
+      }
+        loading={loading}
+        width={200}/>
       <View style={[styles.circle2, { ...Spacer2 }]}></View>
       <View style={[styles.circle3, { ...Spacer3 }]}></View>
     </View>

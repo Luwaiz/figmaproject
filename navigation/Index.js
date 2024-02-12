@@ -11,6 +11,7 @@ import Login from '../screens/Login';
 import LandingPage from '../screens/LandingPage';
 import FoodPage from '../screens/FoodPage.js';
 import ProfilePage from '../screens/ProfilePage.js';
+import CartPage from '../screens/CartPage.js';
 const Stack=createNativeStackNavigator()
 
 const Navigation=({loggedIns})=> {
@@ -34,6 +35,7 @@ function RootNavigator({loggedIns}){
         <Stack.Screen name='LandingPage' component={LandingPage} options={{headerShown:false}}/>
         <Stack.Screen name='FoodPage' component={FoodPage} options={{headerShown:false}}/>
         <Stack.Screen name='ProfilePage' component={ProfilePage} options={{headerShown:false}}/>
+        <Stack.Screen name='CartPage' component={CartPage} options={{headerShown:false}}/>
         </Stack.Navigator>
     )
 }

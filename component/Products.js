@@ -5,7 +5,16 @@ import { Feather } from "@expo/vector-icons";
 
 
 const Products = () => {
+  const [quantity,setQuantity]=useState(0);
+  const DecreaseQuantity=()=>{
+    setQuantity(quantity-1)
+  }
+  const IncreaseQuantity=()=>{
+    setQuantity(quantity+1)
+  }
+
   return (
+
     <View style={styles.Product}>
         <View>
         <Image
@@ -27,15 +36,16 @@ const Products = () => {
                   width: 70,
                 }}
               >
-                <Feather name="minus-circle" size={19} color="black" />
+                <TouchableOpacity onPress={DecreaseQuantity}><Feather name="minus-circle" size={19} color="black" /></TouchableOpacity>
                 <View style={styles.quantity}>
-                  <Text style={{ color: "white" }}>1</Text>
+                  <Text style={{ color: "white" }}>{quantity}</Text>
                 </View>
-                <MaterialIcons
+                <TouchableOpacity onPress={IncreaseQuantity}><MaterialIcons
                   name="add-circle-outline"
-                  size={20}
+                  size={22}
                   color="black"
-                />
+                 />
+                </TouchableOpacity>
               </View>
             </View>
           </View>

@@ -1,4 +1,4 @@
-import { StatusBar } from "react-native";
+import { RefreshControl, StatusBar } from "react-native";
 import {
   StyleSheet,
   View,
@@ -13,25 +13,61 @@ import { Fontisto } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Foundation } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect} from "react";
 import VSlider from "../component/vslider";
 import HSlider from "../component/HSlider";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
+import Context from "../hooks/provider";
+import API from "../constant/API";
 
 const LandingPage = ({ route, CatImage, CatName, ...props }) => {
+  const context=useContext(Context)
+  const [loading,setLoading]=useState(false)
+  const [email,setEmail]=useState("")
+  const {Email,Username2,Password2} = route?.params;
   const navigation=useNavigation()
   const Profile=(require("../assets/blue-pancake.jpg"))
   const NavigateToProfilePage = () => {
-    navigation.navigate("ProfilePage",{Profile});
+    navigation.navigate("ProfilePage",{Profile,Email,Username2,Password2});
   };
-  const { Username1 } = route.params;
+  const NavigateToCart=()=>{
+    navigation.navigate("CartPage",)
+  }
+ 
   const [Percentage, setPercentage] = useState(
     "Get 50% off on these new menus"
   );
+  
+  const config={
+    headers:{
+      Authorization: `Bearer ${context.token}`
+    }
+  }
+  const getUser=async ()=> {
+    setLoading(true)
+    try{
+      const response = await axios.get(API.profile,config)
+      console.log(response.data)
+      setEmail(response?.data?.result?.email)
+      setLoading(false)
+    }
+    catch (e){
+      console.log(e)
+      setLoading(false)
+    }
+    finally{
+      setLoading(false)
+    }
+  }
+
+  useEffect(()=> {
+    getUser()
+  },[])
   return (
     <View style={styles.container}>
       <View style={styles.heading}>
-        <Text style={styles.headText}>Welcome, {Username1}!</Text>
+        <Text style={styles.headText}>Welcome, {email.slice(0,5)}...!</Text>
         <View style={styles.profNotify}>
           <Ionicons
             name="notifications"
@@ -59,8 +95,18 @@ const LandingPage = ({ route, CatImage, CatName, ...props }) => {
           style={styles.searchIcon}
         />
       </View>
+      <ScrollView contentContainerStyle={{alignItems:"center"}} refreshControl={
+        <RefreshControl 
+          refreshing={loading}
+          colors={["#470440"]}
+          tintColor={"#470440"}
+          onRefresh={()=> {
+            getUser()
+          }}
+        />
+      } showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
       <Text style={styles.Percent}>{Percentage}</Text>
-      <ScrollView horizontal={true}>
+      <ScrollView horizontal={true} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
         <HSlider
           PromoName={"Blueberry Pancakes"}
           VImage={require("../assets/blue-pancake.jpg")}
@@ -99,13 +145,16 @@ const LandingPage = ({ route, CatImage, CatName, ...props }) => {
           {...props}
         />
       </ScrollView>
+      </ScrollView>
       <View style={styles.Taskbar}>
         <TouchableOpacity onPress={NavigateToProfilePage}>
           <Ionicons name="person-sharp" size={24} color="white" />
         </TouchableOpacity>
         <Fontisto name="search" size={24} color="white" />
         <MaterialCommunityIcons name="home-outline" size={35} color="white" />
+        <TouchableOpacity onPress={NavigateToCart}>
         <FontAwesome5 name="shopping-cart" size={23} color="white" />
+        </TouchableOpacity>
         <Foundation name="list" size={25} color="white" />
       </View>
     </View>
@@ -152,6 +201,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     borderColor: "#969090",
     borderWidth: 1,
+    marginBottom:16
   },
   search: {
     width: 350,
@@ -171,7 +221,7 @@ const styles = StyleSheet.create({
     paddingRight: 240,
   },
   Percent: {
-    paddingTop: 40,
+    paddingTop: 20,
     marginLeft: -140,
   },
   Taskbar: {

@@ -6,7 +6,7 @@ import Buttons from "../component/Buttons";
 
 const Next2 = ({ navigation }) => {
   const NavigateToSignup = () => {
-    navigation.navigate("Signup");
+    navigation.replace("Signup");
   };
   const [Header, setHeader] = useState("Quick Delivery");
   const [Subtext1, setSubtext1] = useState(

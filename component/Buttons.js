@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity,ActivityIndicator} from "react-native";
 import React, { useState } from "react";
 
-const Buttons = ({ width,Btn,onPress, ...props }) => {
+const Buttons = ({ width,Btn,onPress,disabled=false,loading=false, ...props }) => {
+
   return (
     <TouchableOpacity style={{ position:"absolute",
     height: 58,
@@ -10,9 +11,11 @@ const Buttons = ({ width,Btn,onPress, ...props }) => {
     borderRadius: 30,
     borderWidth: 1,
     borderColor: "black",
-    bottom:20
-    }} onPress={onPress} {...props}>
-      <Text style={styles.btnTxt}>{Btn}</Text>
+    bottom:20,
+    alignItems:"center",
+    justifyContent:"center"
+    }} onPress={onPress} disabled={disabled} {...props} >
+    {loading?(<ActivityIndicator color={"white"} size={25}/>):(<Text style={styles.btnTxt}>{Btn}</Text>)}
     </TouchableOpacity>
   );
 };

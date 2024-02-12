@@ -11,7 +11,7 @@ import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 
 const ProfilePage = ({ navigation, route }) => {
-  const { Profile, Username2, Email,Password2 } = route.params;
+  const { Profile,Email,Username2,Password2 } = route.params;
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -28,7 +28,7 @@ const ProfilePage = ({ navigation, route }) => {
           <Ionicons name="add-circle-sharp" size={42} color="#470440" />
         </View>
       </View>
-      <View style={{ width: 370, alignSelf: "center", }}>
+      <View style={{ width: "100%", alignSelf: "center", paddingHorizontal:10}}>
         <View style={styles.Titles}>
           <Text>Username</Text>
           <Text>{Username2}</Text>
@@ -39,9 +39,9 @@ const ProfilePage = ({ navigation, route }) => {
           </View>
           <View style={styles.Titles}>
           <Text>Password</Text>
-          <Text></Text>
+          <Text>{Password2}</Text>
           </View>
-          <View style={styles.Titles}>
+          <View style={[styles.Titles,{maxHeight:200}]}>
           <Text>Address</Text>
           <Text></Text>
           </View>
@@ -49,6 +49,10 @@ const ProfilePage = ({ navigation, route }) => {
           <Text>Phone number</Text>
           <Text></Text>
           </View>
+      </View>
+      <View style={{bottom:-60,position:"absolute",alignItems:"center",}}>
+        <Text style={{marginBottom:12,fontSize:14}}>Note: Changes can only be edited after 20 days</Text>
+        <View style={{height:100,width:340,alignSelf:"center",borderTopWidth:2,borderTopColor:"#470440"}}></View>
       </View>
     </View>
   );
@@ -63,7 +67,6 @@ const styles = StyleSheet.create({
     marginTop: 40,
     height: 50,
     width: "100%",
-    //backgroundColor:"red",
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 6,
@@ -83,7 +86,8 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderBottomWidth: 1,
     paddingHorizontal: 8,
-    marginBottom:10
+    marginBottom:10,
+    borderColor:"#470440"
   
   },
 });

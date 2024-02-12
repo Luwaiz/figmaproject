@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
     hSliderCont: {
         marginTop: 4,
         marginHorizontal:16,
-        marginBottom:80
       },
       Imagery: {
         height:100,
