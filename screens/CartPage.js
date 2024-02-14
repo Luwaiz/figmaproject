@@ -10,8 +10,11 @@ import {
   } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import React from 'react'
+import { useNavigation } from "@react-navigation/native";
 
-const CartPage = ({navigation}) => {
+const CartPage = (route) => {
+  const navigation =useNavigation()
+  //const {totalQuantity,price}=route.params
   return (
     <View style={styles.container}>
     <View style={styles.topContainer}>
@@ -23,13 +26,13 @@ const CartPage = ({navigation}) => {
         </TouchableOpacity>
       </View>
         <View style={styles.CartItem}>
-        <View style={{flexDirection:"row",paddingHorizontal:"20"}}>
+        <View style={{flexDirection:"row",marginTop:5,justifyContent:"space-between"}}>
             <Image style={styles.itemPic}source={require("../assets/blue-pancake.jpg")}/>
-            <View  style={{paddingLeft:10}}>
+            <View style={{width:200,backgroundColor:""}}>
             <View >
-                <View><Text style={{flexDirection:'row',justifyContent:"space-between"}} >Quantity</Text><Text>1</Text></View>
-                <View><Text>Cost of 1 serving</Text><Text>2</Text></View>
-                <View><Text>Total cost</Text><Text>3</Text></View>
+                <View style={{flexDirection:'row',justifyContent:"space-between", width:250}}><Text>Quantity</Text><Text>7</Text></View>
+                <View style={{flexDirection:'row',justifyContent:"space-between", width:250}}><Text>Cost of 1 serving</Text><Text>4</Text></View>
+                <View style={{flexDirection:'row',justifyContent:"space-between", width:250}}><Text>Total cost</Text><Text>3</Text></View>
             </View>
             <TouchableOpacity style={{width:300}}><Text>Drop item</Text></TouchableOpacity>
             </View>
@@ -44,7 +47,7 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         alignItems:"center",
-        backgroundColor:"rgba(255, 255, 255, 0.31)"
+        backgroundColor:"white"
     },
     itemPic:{
         width:100,
@@ -52,10 +55,10 @@ const styles = StyleSheet.create({
     },
     CartItem:{
         backgroundColor:"red",
-        //width:"300",
-        paddingHorizontal:40,
-        alignItems:"center",
-        marginHorizontal:20
+        
+       justifyContent:"space-between",
+        marginHorizontal:20,
+        width:370
     },
     topContainer: {
         marginTop: 40,

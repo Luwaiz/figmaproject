@@ -83,7 +83,9 @@ const Login = ({ navigation, route, }) => {
         <Text style={styles.FgtPassword}>Forgot password?</Text>
         <Text style={styles.accTxt1}>
           Don't have an account?
-          <Text style={styles.accTxt2}> Sign up</Text>
+          <Text style={styles.accTxt2} onPress={()=> {
+            navigation.navigate("Signup")
+          }}> Sign up</Text>
         </Text>
         
       </View>

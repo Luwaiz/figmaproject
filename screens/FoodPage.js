@@ -9,14 +9,6 @@ const FoodPage = ({route}) => {
 
   const {CatImage,CatName}=route.params;
   const navigation = useNavigation();
-  const [Favorite, setFavorite] = useState("favorite-outline");
-  const [FavoriteColor, setNotFavoriteColor] = useState("black");
-  const handleFavorite = () => {
-    setFavorite(
-      Favorite === "favorite-outline" ? "favorite" : "favorite-outline"
-    );
-    setNotFavoriteColor(FavoriteColor === "black" ? "red" : "black");
-  };
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -24,14 +16,6 @@ const FoodPage = ({route}) => {
           onPress={() => navigation.goBack()}
         >
           <Ionicons name="arrow-back-circle-outline" size={40} color="black" />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleFavorite}>
-          <MaterialIcons
-            name={Favorite}
-            size={30}
-            color={FavoriteColor}
-            style={styles.FavoriteIcon}
-          />
         </TouchableOpacity>
       </View>
       <View>
@@ -45,7 +29,7 @@ const FoodPage = ({route}) => {
       </View>
       <ScrollView>
        <View style={{ flexDirection: "row" }}>
-          <Products ProductId ProductImagery ProductName/>
+          <Products />
           <Products />
          </View>
         <View style={{ flexDirection: "row" }}>
@@ -78,9 +62,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 6,
-  },
-  FavoriteIcon: {
-    paddingTop: 5,
   },
   HeadImage: {
     height: 180,
