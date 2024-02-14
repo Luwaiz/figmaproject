@@ -4,6 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import Products from "../component/Products";
+import BackBtn from "../component/BackBtn";
 
 const FoodPage = ({route}) => {
 
@@ -12,11 +13,7 @@ const FoodPage = ({route}) => {
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-        >
-          <Ionicons name="arrow-back-circle-outline" size={40} color="black" />
-        </TouchableOpacity>
+        <BackBtn/>
       </View>
       <View>
         <Image
@@ -55,7 +52,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255, 255, 255, 0.31)",
   },
   topContainer: {
-    marginTop: 40,
+    marginTop: 30,
     height: 50,
     width: "100%",
     //backgroundColor:"red",

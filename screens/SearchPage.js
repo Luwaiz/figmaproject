@@ -1,4 +1,4 @@
-import { StyleSheet, TextInput, View,TouchableOpacity } from "react-native";
+import { StyleSheet, TextInput, View,TouchableOpacity ,FlatList} from "react-native";
 import { Fontisto } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
@@ -27,6 +27,7 @@ const SearchPage = () => {
           style={styles.searchIcon}
         />
       </View>
+      
     </View>
   );
 };

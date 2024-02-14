@@ -69,12 +69,13 @@ const LandingPage = ({ route, CatImage, CatName, ...props }) => {
       <View style={styles.heading}>
         <Text style={styles.headText}>Welcome, {email.slice(0,5)}...!</Text>
         <View style={styles.profNotify}>
-          <Ionicons
+          <TouchableOpacity onPress={()=>{navigation.navigate("Notification")}}><Ionicons
             name="notifications"
             size={24}
             color="#470440"
             style={styles.notify}
           />
+          </TouchableOpacity>
           <Image
             style={styles.profile}
             source={Profile}

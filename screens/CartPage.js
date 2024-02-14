@@ -23,7 +23,11 @@ const CartPage = (route) => {
           <Ionicons name="arrow-back-circle-outline" size={40} color="black" />
         </TouchableOpacity>
       </View>
-      <CartItems></CartItems>
+      <View>
+      <CartItems/>
+      
+      </View>
+      
     </View>
   );
 };

@@ -6,6 +6,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import Buttons from "../component/Buttons";
+import BackBtn from "../component/BackBtn";
 
 const Items = ({ route }) => {
   const navigation=useNavigation()
@@ -38,9 +39,7 @@ const Items = ({ route }) => {
     <View style={styles.container}>
       {/* top bar with the back navigation and favorite */}
       <View style={styles.topContainer}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back-circle-outline" size={40} color="black" />
-        </TouchableOpacity>
+        <BackBtn/>
         <TouchableOpacity onPress={handleFavorite}>
           <MaterialIcons
             name={Favorite}
@@ -118,7 +117,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   topContainer: {
-    marginTop: 40,
+    marginTop: 30,
     height: 50,
     width: "100%",
     //backgroundColor:"red",

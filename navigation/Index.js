@@ -14,6 +14,7 @@ import ProfilePage from '../screens/ProfilePage.js';
 import CartPage from '../screens/CartPage.js';
 import Items from '../screens/Items.js';
 import SearchPage from '../screens/SearchPage.js';
+import Notification from '../screens/Notification.js';
 
 const Stack=createNativeStackNavigator()
 
@@ -41,6 +42,8 @@ function RootNavigator({loggedIns}){
         <Stack.Screen name='CartPage' component={CartPage} options={{headerShown:false}}/>
         <Stack.Screen name='Items' component={Items} options={{headerShown:false}}/>
         <Stack.Screen name='SearchPage' component={SearchPage} options={{headerShown:false}}/>
+        <Stack.Screen name='Notification' component={Notification} options={{headerShown:false}}/>
+
         </Stack.Navigator>
     )
 }
