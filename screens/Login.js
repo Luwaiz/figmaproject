@@ -10,31 +10,16 @@ import {
 } from "react-native";
 import TextInputBox from "../component/TextInputBox";
 import Buttons from "../component/Buttons";
-import { auths } from "../hooks/firbaseConfig";
 import React, { useState, useContext } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import axios from "axios";
 import API from "../constant/API";
 import Context from "../hooks/provider";
 
 const Login = ({ navigation, route, }) => {
   const context=useContext(Context)
-  const auth=auths;
   const [loading, setLoading] = useState(false);
   const { Username1, Email, ConPassword,Btn="Log in" } = route.params;
   const NavigateToLandingPage = async() => {
-    // if (Username1 === Username2 && Password === Password2) {
-    //   navigation.navigate("LandingPage", { Email,Username1,Password});
-    // }
-    //  else if (Username2 === '' && Password2 === '') {
-    //    //navigation.goBack;
-    //    alert("Fill in your details");
-    //  } 
-    // else {
-    //   alert("Incorrect Password or Username");
-    // }
-
-    
     Keyboard.dismiss()
     setLoading(true)
     try{

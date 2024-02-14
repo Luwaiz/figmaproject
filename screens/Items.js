@@ -1,20 +1,21 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
-import React, { useState } from "react";
+import React, { useState, } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import Buttons from "../component/Buttons";
+
 const Items = ({ route }) => {
-    const navigation=useNavigation()
+  const navigation=useNavigation()
   const { productImage, itemName } = route.params;
   const [price, setPrice] = useState("$" + 9.99);
   const [itemDescription, setItemDescription] = useState(
     "5 slices of blueberry pancakes with complimentary syrup and fresh blueberry toppings"
   );
   const [quantity, setQuantity] = useState(0);
-  const [totalQuantity,setTotalQuantity]=useState(0)
+  
   //quantity counter
   const DecreaseQuantity = () => {
     setQuantity(quantity - 1);
@@ -22,10 +23,7 @@ const Items = ({ route }) => {
   const IncreaseQuantity = () => {
     setQuantity(quantity + 1);
   };
-
-  const finalQuantity =()=>{
-    setTotalQuantity(totalQuantity+quantity)
-  }
+  
 
   //favorite button handler
   const [Favorite, setFavorite] = useState("favorite-outline");
@@ -98,7 +96,7 @@ const Items = ({ route }) => {
           </View>
         }
         onPress={()=> {
-            navigation.navigate("CartPage",{price,totalQuantity})
+            navigation.navigate("CartPage",{price})
         }}
         width={200}
       />
@@ -109,6 +107,7 @@ const Items = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:"white",
     alignItems: "center",
   },
   itemImage: {

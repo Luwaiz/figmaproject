@@ -13,6 +13,8 @@ import FoodPage from '../screens/FoodPage.js';
 import ProfilePage from '../screens/ProfilePage.js';
 import CartPage from '../screens/CartPage.js';
 import Items from '../screens/Items.js';
+import SearchPage from '../screens/SearchPage.js';
+
 const Stack=createNativeStackNavigator()
 
 const Navigation=({loggedIns})=> {
@@ -38,6 +40,7 @@ function RootNavigator({loggedIns}){
         <Stack.Screen name='ProfilePage' component={ProfilePage} options={{headerShown:false}}/>
         <Stack.Screen name='CartPage' component={CartPage} options={{headerShown:false}}/>
         <Stack.Screen name='Items' component={Items} options={{headerShown:false}}/>
+        <Stack.Screen name='SearchPage' component={SearchPage} options={{headerShown:false}}/>
         </Stack.Navigator>
     )
 }

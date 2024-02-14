@@ -150,7 +150,11 @@ const LandingPage = ({ route, CatImage, CatName, ...props }) => {
         <TouchableOpacity onPress={NavigateToProfilePage}>
           <Ionicons name="person-sharp" size={24} color="white" />
         </TouchableOpacity>
-        <Fontisto name="search" size={24} color="white" />
+        <TouchableOpacity onPress={()=>{
+          navigation.navigate("SearchPage")
+        }}>
+          <Fontisto name="search" size={24} color="white" />
+        </TouchableOpacity> 
         <MaterialCommunityIcons name="home-outline" size={35} color="white" />
         <TouchableOpacity onPress={NavigateToCart}>
         <FontAwesome5 name="shopping-cart" size={23} color="white" />
@@ -163,7 +167,7 @@ const LandingPage = ({ route, CatImage, CatName, ...props }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ffff",
+    backgroundColor: "white",
     alignItems: "center",
   },
   heading: {

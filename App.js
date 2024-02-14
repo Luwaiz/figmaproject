@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{useState} from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { StyleSheet, Text, View,TouchableOpacity, Image, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import UseCachedResources from './hooks/UseCachedResources'
 import Navigation from './navigation/Index.js';
 import Context from './hooks/provider.js';
