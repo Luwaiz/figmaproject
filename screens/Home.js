@@ -18,6 +18,8 @@ const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={[styles.circle1, { ...Spacer1 }]}></View>
+      <View style={styles.topContainer}>
+      </View>
       <View style={styles.mainbody}>
         <Text style={styles.text1}>{Header}</Text>
         <Text style={styles.text2}>{Subtext1} </Text>
@@ -41,6 +43,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     //justifyContent: 'center',
+  },
+  topContainer: {
+    marginTop: 30,
+    height: 50,
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 6,
+    alignItems: "center",
   },
   imagery: {
     width: 350,
@@ -77,7 +88,7 @@ const styles = StyleSheet.create({
   mainbody: {
     justifyContent: "center",
     alignItems: "center",
-    top: 580,
+    top: 500,
   },
   widget: {
     paddingTop: 50,

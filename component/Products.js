@@ -3,31 +3,39 @@ import React, { useState,useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 
-const Products = () => {
+const Products = ({item}) => {
   const navigation=useNavigation()
+  const [loading,setLoading]=useState(false)
   const [itemName,setItemName]=useState("Cupcakes")
   const [productImage,setProductImage]= useState(require("../assets/images/close-up-delicious-chocolate-cupcakes-with-raspberry.jpg"))
   const NavigateToItems =()=>{
-    navigation.navigate("Items",{productImage,itemName})
+    navigation.navigate("Items",{productImage,item})
   }
   
 
   return (
 
     <View>
-    <TouchableOpacity onPress={NavigateToItems}>
+    {loading? (
+      <View style={{alignItems:"center",justifyContent:"center"}}>
+      <ActivityIndicator size={"large"} color={"#470440"}/>
+      </View>
+    ):(
+      <TouchableOpacity onPress={NavigateToItems}>
     <View style={styles.Product}>
         <Image
             style={styles.ProductImagery}
             source={productImage}
           ></Image>
           <View style={styles.innerProduct}>
-            <Text style={styles.productName}>{itemName}</Text>
+            <Text style={styles.productName}>{item.name}</Text>
           </View>
           </View>
     
     </TouchableOpacity>
         
+    )}
+
     </View>
     );};
   

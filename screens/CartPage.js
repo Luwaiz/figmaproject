@@ -9,13 +9,15 @@ import {
   FlatList,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import Buttons from "../component/Buttons";
 import React from "react";
 import CartItems from "../component/CartItems";
 import { useNavigation } from "@react-navigation/native";
 
 const CartPage = (route) => {
   const navigation = useNavigation();
-  //const {totalQuantity,price}=route.params
+  const {item}=route.params
+
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -24,10 +26,19 @@ const CartPage = (route) => {
         </TouchableOpacity>
       </View>
       <View>
-      <CartItems/>
-      
+        <CartItems item={item}/>
+        <View style={styles.checkout}>
+          <View style={styles.checkout_summary}>
+            <Text>Total checkout cost</Text>
+            <Text>$238</Text>
+          </View>
+          <View style={styles.checkout_summary}>
+            <Text>Delivery fee</Text>
+            <Text>$78</Text>
+          </View>
+        </View>
       </View>
-      
+      <Buttons Btn={"Checkout"} width={200} />
     </View>
   );
 };
@@ -46,6 +57,20 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 6,
     alignItems: "center",
+  },
+  checkout: {
+    alignItems: "center",
+    width: 370,
+    marginTop:30
+  },
+  checkout_summary: {
+    width: 350,
+    justifyContent: "space-between",
+    flexDirection: "row",
+    paddingVertical: 5,
+    borderBottomWidth: 1,
+    borderTopWidth: 1,
+    marginTop:10
   },
 });
 

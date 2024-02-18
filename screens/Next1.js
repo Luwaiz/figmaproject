@@ -1,7 +1,7 @@
 import { StatusBar } from "react-native";
 import { StyleSheet, View, TouchableOpacity, Image, Text } from "react-native";
 import React, { useState } from "react";
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from "@expo/vector-icons";
 import Buttons from "../component/Buttons";
 
 const Next1 = ({ navigation }) => {
@@ -18,8 +18,12 @@ const Next1 = ({ navigation }) => {
   const [Spacer2, setSpacer2] = useState({ bottom: 190, right: -150 });
   return (
     <View style={styles.container}>
-      <View style={[styles.circle1, { ...Spacer1}]}></View>
-      <TouchableOpacity onPress={()=>navigation.goBack()} style={styles.backBtn}><Ionicons name="arrow-back-circle-outline" size={40} color="black" /></TouchableOpacity>
+      <View style={[styles.circle1, { ...Spacer1 }]}></View>
+      <View style={styles.topContainer}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Ionicons name="arrow-back-circle-outline" size={40} color="black" />
+        </TouchableOpacity>
+      </View>
       <View style={styles.mainbody}>
         <Text style={styles.text1}>{Header}</Text>
         <Text style={styles.text2}>{Subtext1} </Text>
@@ -30,7 +34,7 @@ const Next1 = ({ navigation }) => {
           <View style={styles.widget3}></View>
         </View>
       </View>
-      <Buttons Btn={"Next"} onPress={NavigateToNext2} width={350}/>
+      <Buttons Btn={"Next"} onPress={NavigateToNext2} width={350} />
       <View style={[styles.circle2, { ...Spacer2 }]}></View>
       <StatusBar style="auto" />
     </View>
@@ -44,6 +48,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     //justifyContent: 'center',
   },
+  topContainer: {
+    marginTop: 30,
+    height: 50,
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 6,
+    alignItems: "center",
+  },
   imagery: {
     width: 350,
     height: 350,
@@ -54,7 +67,6 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     paddingBottom: 16,
     fontSize: 20,
-    position: "relative",
   },
   text2: {
     color: "black",
@@ -79,7 +91,7 @@ const styles = StyleSheet.create({
   mainbody: {
     justifyContent: "center",
     alignItems: "center",
-    top: 580,
+    top: 500,
   },
   widget: {
     paddingTop: 50,
@@ -107,10 +119,10 @@ const styles = StyleSheet.create({
     backgroundColor: "grey",
     borderRadius: 15,
   },
-  backBtn:{
+  backBtn: {
     position: "absolute",
-    marginTop:40,
-    left:6
-  }
+    marginTop: 40,
+    left: 6,
+  },
 });
 export default Next1;

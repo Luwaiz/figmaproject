@@ -15,6 +15,9 @@ import CartPage from '../screens/CartPage.js';
 import Items from '../screens/Items.js';
 import SearchPage from '../screens/SearchPage.js';
 import Notification from '../screens/Notification.js';
+import AdminPage from '../screens/AdminPage.js';
+import CreateProd from '../screens/CreateProd.js';
+import ProductPage from '../screens/ProductPage.js';
 
 const Stack=createNativeStackNavigator()
 
@@ -30,7 +33,7 @@ const Navigation=({loggedIns})=> {
 function RootNavigator({loggedIns}){
     const[LoggedIn,setLoggedIn]=React.useState(loggedIns)
     return(
-        <Stack.Navigator initialRouteName='Home'>
+        <Stack.Navigator initialRouteName='Signup'>
         <Stack.Screen name='Home' component={Home} options={{headerShown:false}}/>
         <Stack.Screen name='Next1' component={Next1} options={{headerShown:false}}/>
         <Stack.Screen name='Next2' component={Next2} options={{headerShown:false}}/>
@@ -43,6 +46,9 @@ function RootNavigator({loggedIns}){
         <Stack.Screen name='Items' component={Items} options={{headerShown:false}}/>
         <Stack.Screen name='SearchPage' component={SearchPage} options={{headerShown:false}}/>
         <Stack.Screen name='Notification' component={Notification} options={{headerShown:false}}/>
+        <Stack.Screen name='AdminPage' component={AdminPage} options={{headerShown:false}}/>
+        <Stack.Screen name='CreateProd' component={CreateProd} options={{headerShown:false}}/>
+        <Stack.Screen name='ProductPage' component={ProductPage} options={{headerShown:false}}/>
 
         </Stack.Navigator>
     )

@@ -13,7 +13,7 @@ export default function UseCachedResources() {
                 SplashScreen.preventAutoHideAsync();
                 await Font.loadAsync({
                     ...FontAwesome.font,
-                    'black':require("../assets/fonts/Lato-Black.ttf")
+                    'Lato':require("../assets/fonts/Lato-Regular.ttf")
                 })
             }catch(e){
                 console.warn(e)

@@ -6,20 +6,28 @@ import {
   Image,
   Text,
   TextInput,
-  ScrollView
+  ScrollView,
+  ActivityIndicator
 } from "react-native";
 import React, { useState } from "react";
 
 
 const HSlider = ({PromoName,VImage,...props}) => {
+  const [loading,setLoading]=useState(true)
+  const hanleloading=()=>{
+    setLoading(false)
+  }
   return (
     <View style={styles.hSliderCont}>
     
     <View style={styles.hSlider}>
+    {loading && <ActivityIndicator size="large" color="#470440" style={{alignSelf:"center"}}/>}
+
       <Image
         source={VImage}
         style={styles.Imagery}
         resizeMode="cover"
+        onLoad={hanleloading}
         {...props}
       /><View style={{height:100, width:70}}><Text style={styles.Txt}>{PromoName}</Text></View>
     </View>

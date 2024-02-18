@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   topContainer: {
-    marginTop: 40,
+    marginTop: 30,
     height: 50,
     width: "100%",
     flexDirection: "row",

@@ -7,9 +7,11 @@ import {
   Text,
   TextInput,
 } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
 import React, { useState } from "react";
 
-const TextInputBox = ({ secureTextEntry,keyboardType,onChangeText,placeholder,passwordRules,...props}) => {
+const TextInputBox = ({ secureTextEntry,keyboardType,onChangeText,placeholder,passwordRules,password,...props}) => {
+  const [hidePassword, setHidePassword] = React.useState(!password);
   return (
     <View style={styles.pace}>
     <TextInput
@@ -20,26 +22,35 @@ const TextInputBox = ({ secureTextEntry,keyboardType,onChangeText,placeholder,pa
       onChangeText={onChangeText}
       {...props}
       keyboardType={keyboardType}
-      secureTextEntry={secureTextEntry}
+      secureTextEntry={!hidePassword}
       passwordRules={passwordRules}
-    ></TextInput>
+    />
+    {password && (<TouchableOpacity onPress={()=>{
+      setHidePassword(!hidePassword)
+    }}>{hidePassword?(<FontAwesome name="eye" size={24} color="black" />):(<FontAwesome name="eye-slash" size={24} color="black" />)}</TouchableOpacity>)}
+    
   </View>
   )
 }
 
 const styles = StyleSheet.create({
     pace: {
-        paddingBottom: 30,
+  
         zIndex: 2,
-      },
-      input1: {
+        flexDirection:"row",
+        alignItems:"center",
         borderWidth: 0.5,
         height: 55,
         width: 361,
         paddingHorizontal: 20,
         borderRadius: 15,
         backgroundColor: "white",
-        borderColor:"#969090"
+        borderColor:"#969090",
+        justifyContent:"space-between",
+        marginBottom:30
+      },
+      input1: {
+        width:290
       },
 })
 export default TextInputBox

@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import TextInputBox from "../component/TextInputBox";
 import Buttons from "../component/Buttons";
+import { FontAwesome } from '@expo/vector-icons';
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import API from "../constant/API";
@@ -18,7 +19,8 @@ import Context from "../hooks/provider";
 const Login = ({ navigation, route, }) => {
   const context=useContext(Context)
   const [loading, setLoading] = useState(false);
-  const { Username1, Email, ConPassword,Btn="Log in" } = route.params;
+  const { Email, ConPassword,Btn="Log in" } = route.params;
+  
   const NavigateToLandingPage = async() => {
     Keyboard.dismiss()
     setLoading(true)
@@ -32,9 +34,14 @@ const Login = ({ navigation, route, }) => {
       // navigation.navigate("LandingPage", { Email, Username1, ConPassword });
 
       const response= await axios.post(API.log_in, req)
-      console.log(response.data.result)
-      context.setToken(response.data.result.access_token)
+      console.log(response?.data?.result)
+      context.setToken(response?.data?.result?.access_token)
+
+      if (Username2.trim()==="Splax@gmail.com"){
+        navigation.navigate("AdminPage",{Email,Username2})
+      }else{
       navigation.navigate("LandingPage", { Email, Username2, Password2 });
+      }
     }catch(e){
       console.log(e)
       alert("Sign up failed: " + e.message)
@@ -46,8 +53,11 @@ const Login = ({ navigation, route, }) => {
   
   const [Password2, setPassword2] = useState("");
   const [Username2, setUsername2] = useState("");
+  const [secure,setSecure]=useState(true)
   const [Spacer2, setSpacer2] = useState({ bottom: 170, right: -150 });
   const [Spacer3, setSpacer3] = useState({ bottom: -90, left: -120 });
+
+  
   return (
     <View style={styles.container}>
       <View style={styles.Circle1}>
@@ -59,12 +69,15 @@ const Login = ({ navigation, route, }) => {
           onChangeText={(text) => setUsername2(text)}
           keyboardType="default"
         />
-        <TextInputBox
-          placeholder="Password"
-          onChangeText={(text) => setPassword2(text)}
-          keyboardType="default"
-          secureTextEntry
-        />
+        
+        <View style={{alignItems:"center"}}>
+          <TextInputBox
+            placeholder="Password"
+            onChangeText={(text) => setPassword2(text)}
+            keyboardType="default"
+            password={true}
+            />
+          </View>
         <Text style={styles.FgtPassword}>Forgot password?</Text>
         <Text style={styles.accTxt1}>
           Don't have an account?
@@ -127,7 +140,9 @@ const styles = StyleSheet.create({
     fontSize: 50,
     color: "white",
     textAlign:"center",
-    bottom:-330
+    bottom:-330,
+    fontFamily:"Lato",
+    fontWeight:"600"
   },
   FgtPassword:{
     marginRight:-230,

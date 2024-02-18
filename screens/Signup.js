@@ -10,13 +10,10 @@ import {
 import TextInputBox from "../component/TextInputBox";
 import React, { useState } from "react";
 import Buttons from "../component/Buttons";
-import { auths } from "../hooks/firbaseConfig";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import axios from "axios";
 import API from "../constant/API";
 
 const Signup = ({ navigation }) => {
-  const auth=auths;
   const [loading, setLoading] = useState(false);
   const [Spacer2, setSpacer2] = useState({ bottom: 170, right: -150 });
   const [Spacer3, setSpacer3] = useState({ bottom: -90, left: -120 });
@@ -24,23 +21,10 @@ const Signup = ({ navigation }) => {
   const [Username1, setUsername1] = useState("");
   const [Password, setPassword] = useState("");
   const [ConPassword, setConPassword] = useState("");
-  const NavigateToLogin = async () => {
-    // if (Password === ConPassword) {
-    //   navigation.navigate("Login", { Email, Username1, Password });
-    // } else if (
-    //   Email === "" ||
-    //   Password === "" ||
-    //   Username1 === "" ||
-    //   ConPassword === ""
-    // ) {
-    //   //navigation.goBack
-    //   alert("Fill in your details");
-    // } else {
-    //   alert("Password confirmation invalid");
-    // }
 
+  const NavigateToLogin = async () => {
     const req = {
-      email:Email,
+      email:Email.toLowerCase(),
       password:ConPassword
     }
     Keyboard.dismiss()
@@ -82,13 +66,13 @@ const Signup = ({ navigation }) => {
           placeholder="Password"
           onChangeText={(text) => setPassword(text)}
           keyboardType="default"
-          secureTextEntry
+          password={true}
         />
         <TextInputBox
           placeholder="Confirm Password"
           onChangeText={(text) => setConPassword(text)}
           keyboardType="default"
-          secureTextEntry
+          password={true}
         />
         <Text style={styles.accTxt1}>
           Already have an account?
@@ -156,6 +140,8 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     bottom: -330,
+    fontFamily:"Lato",
+    fontWeight:"600"
   },
   circle2: {
     backgroundColor: "#470440",

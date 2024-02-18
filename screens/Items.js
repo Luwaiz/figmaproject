@@ -10,11 +10,10 @@ import BackBtn from "../component/BackBtn";
 
 const Items = ({ route }) => {
   const navigation=useNavigation()
-  const { productImage, itemName } = route.params;
-  const [price, setPrice] = useState("$" + 9.99);
-  const [itemDescription, setItemDescription] = useState(
-    "5 slices of blueberry pancakes with complimentary syrup and fresh blueberry toppings"
-  );
+  const { productImage, item } = route.params;
+  const NavigateToCartPage=()=>{
+    navigation.navigate("CartPage",{productImage,item})
+  }
   const [quantity, setQuantity] = useState(0);
   
   //quantity counter
@@ -52,10 +51,10 @@ const Items = ({ route }) => {
 
       <Image source={productImage} style={styles.itemImage} />
       <Text style={{ marginTop: 27, fontSize: 20, fontWeight: "500" }}>
-        {itemName}
+        {item.name}
       </Text>
       <View style={styles.description}>
-        <Text>{itemDescription}</Text>
+        <Text>{item?.description}</Text>
       </View>
       <View
         style={{
@@ -67,7 +66,7 @@ const Items = ({ route }) => {
         }}
       >
         <Text style={{ fontSize: 16, fontWeight: "500" }}>Price</Text>
-        <Text style={{ fontSize: 16, fontWeight: "500" }}>{price}</Text>
+        <Text style={{ fontSize: 16, fontWeight: "500" }}>{item.price}</Text>
       </View>
 
       <View style={styles.contQuantity}>
@@ -94,9 +93,7 @@ const Items = ({ route }) => {
             <FontAwesome5 name="shopping-cart" size={20} color="white" />
           </View>
         }
-        onPress={()=> {
-            navigation.navigate("CartPage",{price})
-        }}
+        onPress={NavigateToCartPage}
         width={200}
       />
     </View>
