@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         marginBottom:30
       },
       input1: {
-        width:290
+        width:300
       },
 })
 export default TextInputBox

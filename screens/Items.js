@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
-import React, { useState, } from "react";
+import React, { useContext, useState, } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -7,14 +7,43 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import Buttons from "../component/Buttons";
 import BackBtn from "../component/BackBtn";
+import axios from "axios";
+import API from "../constant/API";
+import Context from "../hooks/provider";
 
 const Items = ({ route }) => {
   const navigation=useNavigation()
+  const context=useContext(Context);
+  const [loading,setLoading]=useState(false);
   const { productImage, item } = route.params;
-  const NavigateToCartPage=()=>{
-    navigation.navigate("CartPage",{productImage,item})
-  }
   const [quantity, setQuantity] = useState(0);
+  const [productId,setProductId]=useState(item.id);
+  const [userId,setUserId]=useState("")
+
+ 
+  const NavigateToCartPage= async()=>{
+    const config = {
+      headers: {
+        Authorization: `Bearer ${context.token}`,
+      },}
+    const req={
+      quantity: quantity,
+      product_id: productId.toString(),
+    }
+    setLoading(true)
+    try{
+      const response = await axios.post(API.placeOrder,req)
+      console.log(response)
+      navigation.navigate("CartPage",{productId,item,quantity})
+    }
+    catch(e){
+      console.log(e)
+      setLoading(false)
+    }
+    finally{
+      setLoading(false)
+    }
+  }
   
   //quantity counter
   const DecreaseQuantity = () => {
@@ -35,6 +64,7 @@ const Items = ({ route }) => {
     setNotFavoriteColor(FavoriteColor === "black" ? "red" : "black");
   };
   return (
+    
     <View style={styles.container}>
       {/* top bar with the back navigation and favorite */}
       <View style={styles.topContainer}>
@@ -66,7 +96,7 @@ const Items = ({ route }) => {
         }}
       >
         <Text style={{ fontSize: 16, fontWeight: "500" }}>Price</Text>
-        <Text style={{ fontSize: 16, fontWeight: "500" }}>{item.price}</Text>
+        <Text style={{ fontSize: 16, fontWeight: "500" }}>${item.price}</Text>
       </View>
 
       <View style={styles.contQuantity}>
@@ -93,6 +123,7 @@ const Items = ({ route }) => {
             <FontAwesome5 name="shopping-cart" size={20} color="white" />
           </View>
         }
+        loading={loading}
         onPress={NavigateToCartPage}
         width={200}
       />

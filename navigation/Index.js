@@ -18,6 +18,7 @@ import Notification from '../screens/Notification.js';
 import AdminPage from '../screens/AdminPage.js';
 import CreateProd from '../screens/CreateProd.js';
 import ProductPage from '../screens/ProductPage.js';
+import UpdateProducts from '../screens/UpdateProducts.js';
 
 const Stack=createNativeStackNavigator()
 
@@ -49,6 +50,7 @@ function RootNavigator({loggedIns}){
         <Stack.Screen name='AdminPage' component={AdminPage} options={{headerShown:false}}/>
         <Stack.Screen name='CreateProd' component={CreateProd} options={{headerShown:false}}/>
         <Stack.Screen name='ProductPage' component={ProductPage} options={{headerShown:false}}/>
+        <Stack.Screen name='UpdateProducts' component={UpdateProducts} options={{headerShown:false}}/>
 
         </Stack.Navigator>
     )

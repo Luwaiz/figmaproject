@@ -1,11 +1,39 @@
-import { StyleSheet, TextInput, View,TouchableOpacity ,FlatList} from "react-native";
+import { StyleSheet, TextInput, View,TouchableOpacity ,FlatList, ActivityIndicator} from "react-native";
 import { Fontisto } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import API from "../constant/API";
+import SearchFilter from "../component/SearchFilter";
 
 const SearchPage = () => {
   const navigation=useNavigation()
+  const [loading,setLoading]=useState(false)
+  const [data,setData]=useState([])
+  const [searcher,setSearcher]=useState("")
+
+  const getSearch = async ()=>{
+    setLoading(true)
+    try{
+      const response= await axios.get(API.product)
+      //console.log(response?.data?.result?.products)
+      setData(response?.data?.result?.products)
+      
+    }
+    catch(e){
+      console.log(e)
+      setLoading(false)
+    }
+    finally{
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    getSearch();
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -19,6 +47,8 @@ const SearchPage = () => {
           placeholder="Search"
           placeholderTextColor={"#635D5D"}
           cursorColor={"#635D5D"}
+          onChangeText={(text)=>setSearcher(text)}
+          value={searcher}
         />
         <Fontisto
           name="search"
@@ -27,6 +57,9 @@ const SearchPage = () => {
           style={styles.searchIcon}
         />
       </View>
+      {loading? (<View>
+        <ActivityIndicator style={{justifyContent:"center",alignSelf:"center"}} size={"large"} color={"#470440"}/>
+      </View>):(<View><SearchFilter data={data} searcher={searcher} setSearcher={setSearcher}/></View>)}
       
     </View>
   );

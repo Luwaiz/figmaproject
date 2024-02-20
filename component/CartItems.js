@@ -12,10 +12,9 @@ import { Ionicons } from "@expo/vector-icons";
 import React from 'react'
 import { useNavigation } from "@react-navigation/native";
 
-const CartItems = ({route,props}) => {
+const CartItems = ({route,item,productId}) => {
  // const {item,productImag}=route.params
-
- console.log(props.item?.name)
+ 
   return (
     <View>
         <View style={styles.CartItem}>

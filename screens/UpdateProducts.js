@@ -7,48 +7,76 @@ import API from "../constant/API";
 import Buttons from "../component/Buttons";
 import AdminPage from "./AdminPage";
 import BackBtn from "../component/BackBtn";
+import Products from "../component/Products";
 
-const CreateProd = () => {
-  const navigation=useNavigation()
+const UpdateProducts = ({route}) => {
+  const navigation = useNavigation();
   const context = useContext(Context);
-
+  const {fromProductPage,fromAdminPage}=route.params
   const [loading, setLoading] = useState(false);
-  const [profiles, setProfiles] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [productName, setProductName] = useState("");
+  const [productDescription, setProductDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [productId, setProductId] = useState(products);
+
+  if (fromProductPage){
+    console.log("true")
+    //const{name}=route.params
+  }else if(fromAdminPage){
+    console.log("false")
+  }
+  
   const config = {
     headers: {
       Authorization: `Bearer ${context.token}`,
     },
   };
-  const NavigateToAdmin = async () => {
-    const req = {
-      name: productName,
-      price: parseFloat(price),
-      description: productDescription,
-    };
-    Keyboard.dismiss()
-    setLoading(true);
-    try {
-      const response = await axios.post(API.createProduct, req,config);
-      console.log(response?.data?.result?.products);
-      navigation.navigate("AdminPage",{price,productDescription,productName});
-    } catch (e) {
-      console.log(e);
-      setLoading(false);
-    } finally {
-      setLoading(false);
-    }
-  };
 
-  const [productName, setProductName] = useState("");
-  const [productDescription, setProductDescription] = useState("");
-  const [price, setPrice] = useState("");
+   const getProducts = async () => {
+     setLoading(true);
+     try {
+       const response = await axios.get(API.product);
+       console.log(response?.data?.result?.products);
+       setProducts(response?.data?.result?.products);
+     } catch (e) {
+       console.log(e);
+       setLoading(false);
+     } finally {
+       setLoading(false);
+     }
+   };
+   useEffect(() => {
+     getProducts();
+   }, []);
+
+
+
   return (
     <View style={styles.container}>
-    <View style={styles.topContainer}>
-    <BackBtn/>
-    </View>
-    
+      <View style={styles.topContainer}>
+        <BackBtn />
+      </View>
+
+      {/* //getting the id from the api
+      {products.map((item,index)=>(
+        <View key={index.toString()}>
+          <View><Text>{(index +1).toString()}</Text><Text>{item.id}</Text></View>
+        </View>
+        
+      ))} */}
+        
       <View style={{ marginTop: 20 }}>
+      <View style={styles.cont}>
+          <Text style={styles.texts}>Product Id</Text>
+          <View style={styles.textBox}>
+            <TextInput
+              cursorColor={"#635D5D"}
+              placeholder="enter"
+              onChangeText={(text) => setProductId(text)}
+            />
+          </View>
+        </View>
         <View style={styles.cont}>
           <Text style={styles.texts}>Product Name</Text>
           <View style={styles.textBox}>
@@ -77,14 +105,18 @@ const CreateProd = () => {
               placeholder="enter"
               onChangeText={(text) => setProductDescription(text)}
               multiline={true}
-              style={{minHeight:30}}
+              style={{ minHeight: 30 }}
             />
           </View>
         </View>
       </View>
-      <Buttons Btn={"Create product"} loading={loading} width={250} onPress={NavigateToAdmin}
-        disabled={loading || price==="" || productDescription==="" || productName ===""}
-         />
+
+      <Buttons
+        Btn={"Update product"}
+        loading={loading}
+        width={250}
+        onPress={getProducts}
+      />
     </View>
   );
 };
@@ -115,7 +147,7 @@ const styles = StyleSheet.create({
     // marginRight:20
   },
   textBox: {
-    marginTop:10,
+    marginTop: 10,
     width: 350,
     borderWidth: 1,
     borderColor: "#470440",
@@ -123,8 +155,8 @@ const styles = StyleSheet.create({
     minHeight: 50,
     justifyContent: "center",
     paddingHorizontal: 10,
-    paddingVertical:10
+    paddingVertical: 10,
   },
 });
 
-export default CreateProd;
+export default UpdateProducts;

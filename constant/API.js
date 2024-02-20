@@ -10,5 +10,10 @@ export default{
     "change_password": `${url}/auth/change-password`,
 
     //products
-    "product":`${url}/products`
+    "createProduct":`${url}/products`,
+    "product":`${url}/products`,
+    "UpdateProducts":`${url}/products`,
+
+    //orders
+    "placeOrder":`${url}/orders`
 }

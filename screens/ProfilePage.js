@@ -41,7 +41,7 @@ const ProfilePage = ({ navigation, route }) => {
         </View>
         <View style={styles.Titles}>
           <Text>Email</Text>
-          <Text>{Email}</Text>
+          <Text>{Username2}</Text>
           </View>
           <View style={styles.Titles}>
           <Text>Password</Text>

@@ -16,7 +16,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const CartPage = (route) => {
   const navigation = useNavigation();
-  const {item}=route.params
+  const {item,productId}=route.params||{};
 
   return (
     <View style={styles.container}>

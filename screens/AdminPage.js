@@ -97,6 +97,13 @@ const AdminPage = ({ route }) => {
             </Text>
           </View>
         </TouchableOpacity>
+        <TouchableOpacity onPress={()=>{navigation.navigate("UpdateProducts",{fromAdminPage:true})}}>
+          <View style={styles.Btn}>
+            <Text style={{ color: "white", fontSize: 16 }}>
+              Update Products
+            </Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
