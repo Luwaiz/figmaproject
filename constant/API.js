@@ -15,5 +15,7 @@ export default{
     "UpdateProducts":`${url}/products`,
 
     //orders
-    "placeOrder":`${url}/orders`
+    "placeOrder":`${url}/orders`,
+    "getOrder":`${url}/orders`,
+    "orderDetails": `${url}/orders`
 }

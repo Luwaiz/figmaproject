@@ -35,7 +35,7 @@ const Signup = ({ navigation }) => {
       // navigation.navigate("Login", { Email, Username1, ConPassword });
       
       const response= await axios.post(API.register, req)
-      console.log(response.data.result.user)
+      console.log(response?.data?.result?.user)
       navigation.navigate("Login", { Email, Username1, ConPassword });
     }catch(e){
       console.log(e)
@@ -96,6 +96,7 @@ const Signup = ({ navigation }) => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -13,7 +13,7 @@ import { Ionicons } from "@expo/vector-icons";
 import React,{useState} from "react";
 
 const ProfilePage = ({ navigation, route }) => {
-  const { Profile,Email,Username2,Password2 } = route.params;
+  const { Profile,email,Username2,Password2 } = route.params;
   const [profileOverlay, setProfileOverlay] = useState(false);
   const handleOverlay = () => {
     setProfileOverlay(!profileOverlay);
@@ -37,11 +37,11 @@ const ProfilePage = ({ navigation, route }) => {
       <View style={{ width: "100%", alignSelf: "center", paddingHorizontal:10}}>
         <View style={styles.Titles}>
           <Text>Username</Text>
-          <Text>{Username2}</Text>
+          <Text>{email}</Text>
         </View>
         <View style={styles.Titles}>
           <Text>Email</Text>
-          <Text>{Username2}</Text>
+          <Text>{email}</Text>
           </View>
           <View style={styles.Titles}>
           <Text>Password</Text>

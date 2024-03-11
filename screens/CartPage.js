@@ -7,16 +7,103 @@ import {
   Button,
   ScrollView,
   FlatList,
+  ActivityIndicator,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Buttons from "../component/Buttons";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CartItems from "../component/CartItems";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
+import API from "../constant/API";
+import Context from "../hooks/provider";
 
-const CartPage = (route) => {
+const CartPage = ({route}) => {
+  const context=useContext(Context)
+  const [loading,setLoading]=useState(false)
   const navigation = useNavigation();
-  const {item,productId}=route.params||{};
+  const {orderId}=route.params
+  const id=orderId
+  const [orders,setOrders]=useState([])
+
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${context.token}`,
+    },}
+
+    const getOrders =async()=>{
+      setLoading(true)
+      try{
+        const response= await axios.get(`${API.orderDetails}/${id}`,config)
+        console.log(response?.data?.result?.lines)
+        const ordering= response?.data?.result?.lines
+        setOrders(ordering)
+      }
+      catch(e){
+        console.log(e)
+        setLoading(false)
+      }
+      finally{
+        setLoading(false)
+      }
+      
+    }
+
+    useEffect(()=>{
+      getOrders()
+      
+    },[id])
+
+      // const listOrders =async()=>{
+      //   setLoading(true)
+      //   try{
+      //     const response= await axios.get(API.getOrder,config)
+      //     //console.log(response?.data?.result?.orders)
+        
+      //   }
+      //   catch(e){
+      //     console.log(e)
+      //     setLoading(false)
+      //   }
+      //   finally{
+      //     setLoading(false)
+      //   }
+        
+      // }
+  
+      // useEffect(()=>{
+      //   listOrders()
+      // },[])
+
+//start
+
+// const [cartItems, setCartItems] = useState([]);
+
+
+//   // Function to remove items from the cart
+//   const removeFromCart = (index) => {
+//     const newCartItems = [...cartItems];
+//     newCartItems.splice(index, 1);
+//     setCartItems(newCartItems);
+//   };
+
+//   return (
+//     <View>
+//       <Text>Cart</Text>
+    
+//         {cartItems.map((item, index) => (
+//           <ScrollView key={index}>
+//             <View>{item.name}</View>
+//             <View>{item.quantity}</View>
+//             <View>{item.price}</View>
+//           </ScrollView>
+//         ))}
+      
+//     </View>
+//   );
+
+// stop
 
   return (
     <View style={styles.container}>
@@ -26,7 +113,16 @@ const CartPage = (route) => {
         </TouchableOpacity>
       </View>
       <View>
-        <CartItems item={item}/>
+      {orders?(<Text>present</Text>):(<Text>absent</Text>)}
+        <View>
+      {loading?(<ActivityIndicator color={"#470440"} size={"large"}/>):(
+        
+        <FlatList
+        data={orders}
+        renderItem={({item,index})=><CartItems item={item} index={index.toString()}/>}
+      />
+        )}
+    </View>
         <View style={styles.checkout}>
           <View style={styles.checkout_summary}>
             <Text>Total checkout cost</Text>

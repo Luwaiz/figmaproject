@@ -11,6 +11,7 @@ const Notification = () => {
     const navigation=useNavigation()
   return (
     <View>
+    
       <View style={styles.topContainer}>
         <BackBtn/>
         <Ionicons
@@ -20,9 +21,11 @@ const Notification = () => {
           />
       </View>
       <View style={styles.notifications}>
-        <TouchableOpacity><View style={styles.notify}><CheckMark/><Text>Your order has arrived!</Text></View></TouchableOpacity>
+        <TouchableOpacity><View style={styles.notify}><CheckMark/>
+        <Text>Your order has arrived!</Text>
+        </View></TouchableOpacity>
       </View>
-      
+  
     </View>
   )
 }

@@ -1,9 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{useState} from 'react'
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider} from 'react-native-safe-area-context';
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import UseCachedResources from './hooks/UseCachedResources'
-import Navigation from './navigation/Index.js';
+import Navigation from './navigation'
 import Context from './hooks/provider.js';
 
 const App=()=> {

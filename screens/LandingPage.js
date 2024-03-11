@@ -34,13 +34,16 @@ const LandingPage = ({ route, CatImage, CatName, ...props }) => {
   const navigation = useNavigation();
   const Profile = require("../assets/blue-pancake.jpg");
   const [profileOverlay, setProfileOverlay] = useState(false);
-  const handleOverlay = () => {
+
+  const handleProfile = () => {
     setProfileOverlay(!profileOverlay);
   };
+
+  
   const NavigateToProfilePage = () => {
     navigation.navigate("ProfilePage", {
       Profile,
-      Email,
+      email,
       Username2,
       Password2,
     });
@@ -79,7 +82,7 @@ const LandingPage = ({ route, CatImage, CatName, ...props }) => {
   return (
     <View style={styles.container}>
       <View style={styles.heading}>
-        <Text style={styles.headText}>Welcome, {email.slice(0, 5)}...!</Text>
+        <Text style={styles.headText}>Welcome, {email.slice(0, -10)}!</Text>
         <View style={styles.profNotify}>
           <TouchableOpacity
             onPress={() => {
@@ -93,7 +96,7 @@ const LandingPage = ({ route, CatImage, CatName, ...props }) => {
               style={styles.notify}
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleOverlay}>
+          <TouchableOpacity onPress={handleProfile}>
             <Image style={styles.profile} source={Profile}></Image>
           </TouchableOpacity>
         </View>
@@ -173,23 +176,28 @@ const LandingPage = ({ route, CatImage, CatName, ...props }) => {
           />
         </ScrollView>
       </ScrollView>
+
+      {/* bottom navbar */}
       <View style={styles.Taskbar}>
         <TouchableOpacity onPress={NavigateToProfilePage}>
           <Ionicons name="person-sharp" size={24} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("SearchPage");
-          }}
-        >
+        <TouchableOpacity onPress={()=>{navigation.navigate("SearchPage")}}>
           <Fontisto name="search" size={24} color="white" />
         </TouchableOpacity>
         <MaterialCommunityIcons name="home-outline" size={35} color="white" />
         <TouchableOpacity onPress={NavigateToCart}>
           <FontAwesome5 name="shopping-cart" size={23} color="white" />
         </TouchableOpacity>
-        <Foundation name="list" size={25} color="white" />
+        <TouchableOpacity onPress={()=>{navigation.navigate("SettingsPage")}}>
+          <Foundation name="list" size={25} color="white" />
+        </TouchableOpacity>
+       
       </View>
+
+     
+
+      {/* profile picture overlay */}
       <Modal
         animationType="fade"
         transparent={true}
@@ -198,7 +206,7 @@ const LandingPage = ({ route, CatImage, CatName, ...props }) => {
           setProfileOverlay(false);
         }}
       >
-        <TouchableWithoutFeedback onPress={handleOverlay}>
+        <TouchableWithoutFeedback onPress={handleProfile}>
           <View
             style={[
               styles.container,
@@ -255,10 +263,10 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     borderColor: "#969090",
     borderWidth: 1,
-    marginBottom: 16,
+    
   },
   search: {
-    width: 350,
+    width: 370,
     height: 50,
     paddingLeft: 16,
   },
@@ -279,12 +287,13 @@ const styles = StyleSheet.create({
     marginLeft: -140,
   },
   Taskbar: {
-    width: 380,
+    width: "100%",
     height: 54,
     backgroundColor: "#470440",
     position: "absolute",
-    bottom: 3,
-    borderRadius: 24,
+    bottom: 0,
+    borderTopLeftRadius:24,
+    borderTopRightRadius:24,
     flexDirection: "row",
     justifyContent: "space-around",
     alignContent: "center",

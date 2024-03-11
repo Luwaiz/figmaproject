@@ -13,13 +13,15 @@ const FoodPage = ({route}) => {
   const [loading,setLoading]=useState(false)
   const [reloading,setReloading]=useState(false)
   const [products,setProducts]=useState([])
+  const [page,setPage]=useState(1)
   const {CatImage,CatName}=route.params;
   const navigation = useNavigation();
   const getProducts = async ()=>{
     setLoading(true)
     try{
-      const response = await axios.get(API.product)
-      console.log(response?.data?.result?.products)
+      const response = await axios.get(`${API.product}/${page}`)
+      console.log(response?.data?.result)
+      setPage(page+1)
       setProducts(response?.data?.result?.products)
     }
     catch(e){
@@ -34,7 +36,7 @@ const FoodPage = ({route}) => {
   }
   useEffect(()=>{
     getProducts()
-  },[])
+  },[page])
   return (
     <View style={styles.container}>
     {loading? (
@@ -116,6 +118,7 @@ const styles = StyleSheet.create({
     fontWeight: "400",
   },
   row:{
+    justifyContent:"center",
   flexDirection:"row",
   flexWrap:"wrap",
   

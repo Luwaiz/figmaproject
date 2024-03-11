@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
-import React, { useContext, useState, } from "react";
+import React, { useContext, useEffect, useState, } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -17,24 +17,55 @@ const Items = ({ route }) => {
   const [loading,setLoading]=useState(false);
   const { productImage, item } = route.params;
   const [quantity, setQuantity] = useState(0);
-  const [productId,setProductId]=useState(item.id);
+  const finalQuantity=quantity
   const [userId,setUserId]=useState("")
+  const items=item
+  const price=(items.price)
+  const productId=items.id
+  const code=items.code.toString()
+  const status=items.status
+  const [orderId,setOrderId]=useState("")
 
- 
+  const config = {
+    headers: {
+      Authorization: `Bearer ${context.token}`,
+    },}
+
+    const getUser = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(API.profile, config);
+        console.log(response?.data?.result?.id);
+        setUserId(response?.data?.result?.id)
+        setLoading(false)
+      } catch (e) {
+        console.log(e);
+        setLoading(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    useEffect(() => {
+      getUser();
+    }, []);
+
   const NavigateToCartPage= async()=>{
-    const config = {
-      headers: {
-        Authorization: `Bearer ${context.token}`,
-      },}
     const req={
-      quantity: quantity,
-      product_id: productId.toString(),
+      lines:[{
+        quantity: finalQuantity,
+        product_id: productId.toString(),
+      }],
+      user_id:userId
+      
     }
     setLoading(true)
     try{
-      const response = await axios.post(API.placeOrder,req)
-      console.log(response)
-      navigation.navigate("CartPage",{productId,item,quantity})
+      const response = await axios.post(API.placeOrder,req,config)
+      console.log(response?.data?.result)
+      const newOrderId=response?.data?.result?.id.toString()
+      setOrderId(newOrderId)
+      navigation.navigate("CartPage",{orderId})
     }
     catch(e){
       console.log(e)
@@ -45,9 +76,14 @@ const Items = ({ route }) => {
     }
   }
   
+useEffect(()=>{
+},[orderId])
+
   //quantity counter
   const DecreaseQuantity = () => {
-    setQuantity(quantity - 1);
+    if(quantity !== 0){
+      setQuantity(quantity - 1);
+    }
   };
   const IncreaseQuantity = () => {
     setQuantity(quantity + 1);
@@ -81,10 +117,10 @@ const Items = ({ route }) => {
 
       <Image source={productImage} style={styles.itemImage} />
       <Text style={{ marginTop: 27, fontSize: 20, fontWeight: "500" }}>
-        {item.name}
+        {items.name}
       </Text>
       <View style={styles.description}>
-        <Text>{item?.description}</Text>
+        <Text>{items.description}</Text>
       </View>
       <View
         style={{
@@ -96,7 +132,7 @@ const Items = ({ route }) => {
         }}
       >
         <Text style={{ fontSize: 16, fontWeight: "500" }}>Price</Text>
-        <Text style={{ fontSize: 16, fontWeight: "500" }}>${item.price}</Text>
+        <Text style={{ fontSize: 16, fontWeight: "500",paddingRight:10 }}>${price}</Text>
       </View>
 
       <View style={styles.contQuantity}>
@@ -111,14 +147,11 @@ const Items = ({ route }) => {
         </TouchableOpacity>
       </View>
 
+
       <Buttons
         Btn={
           <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
+            style={{flexDirection: "row"}}>
             <Text style={{ color: "white" }}>Add to cart   </Text>
             <FontAwesome5 name="shopping-cart" size={20} color="white" />
           </View>

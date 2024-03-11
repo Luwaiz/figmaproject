@@ -30,7 +30,7 @@ const CreateProd = () => {
     try {
       const response = await axios.post(API.createProduct, req,config);
       console.log(response?.data?.result?.products);
-      navigation.navigate("AdminPage",{price,productDescription,productName});
+      navigation.navigate("AdminPage");
     } catch (e) {
       console.log(e);
       setLoading(false);
@@ -63,6 +63,7 @@ const CreateProd = () => {
           <Text style={styles.texts}>Product price</Text>
           <View style={styles.textBox}>
             <TextInput
+            keyboardType="numeric"
               cursorColor={"#635D5D"}
               placeholder="enter"
               onChangeText={(text) => setPrice(text)}

@@ -21,7 +21,7 @@ const Buttons = ({ width,Btn,onPress,disabled=false,loading=false, ...props }) =
 };
 const styles = StyleSheet.create({
       btnTxt: {
-        position: "absolute",
+      
         color: "white",
         paddingVertical: 18,
         alignSelf:"center"

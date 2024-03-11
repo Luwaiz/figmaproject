@@ -7,8 +7,8 @@ import { useNavigation } from "@react-navigation/native";
 import API from "../constant/API";
 import SearchFilter from "../component/SearchFilter";
 
-const SearchPage = () => {
-  const navigation=useNavigation()
+const SearchPage = ({navigation}) => {
+
   const [loading,setLoading]=useState(false)
   const [data,setData]=useState([])
   const [searcher,setSearcher]=useState("")
@@ -59,7 +59,7 @@ const SearchPage = () => {
       </View>
       {loading? (<View>
         <ActivityIndicator style={{justifyContent:"center",alignSelf:"center"}} size={"large"} color={"#470440"}/>
-      </View>):(<View><SearchFilter data={data} searcher={searcher} setSearcher={setSearcher}/></View>)}
+      </View>):(<View><SearchFilter data={data} searcher={searcher} setSearcher={setSearcher} navigation={navigation}/></View>)}
       
     </View>
   );
@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flexDirection: "row",
-    marginTop: 10,
     alignItems: "center",
     backgroundColor: "#D9D9D9",
     borderRadius: 25,

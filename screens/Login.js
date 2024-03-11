@@ -19,7 +19,6 @@ import Context from "../hooks/provider";
 const Login = ({ navigation, route, }) => {
   const context=useContext(Context)
   const [loading, setLoading] = useState(false);
-  const { Email, ConPassword,Btn="Log in" } = route.params;
   
   const NavigateToLandingPage = async() => {
     Keyboard.dismiss()
@@ -29,18 +28,16 @@ const Login = ({ navigation, route, }) => {
         email:Username2.trim(),
         password:Password2
       }
-      // const response=await signInWithEmailAndPassword(auth,Username2,Password2)
-      // console.log(response)
-      // navigation.navigate("LandingPage", { Email, Username1, ConPassword });
+    
 
       const response= await axios.post(API.log_in, req)
       console.log(response?.data?.result)
       context.setToken(response?.data?.result?.access_token)
 
       if (Username2.trim()==="Splax@gmail.com"){
-        navigation.navigate("AdminPage",{Email,Username2})
+        navigation.navigate("AdminPage",{Username2})
       }else{
-      navigation.navigate("LandingPage", { Email, Username2, Password2 });
+      navigation.navigate("LandingPage", {Username2, Password2 });
       }
     }catch(e){
       console.log(e)

@@ -6,7 +6,6 @@ import { useNavigation } from "@react-navigation/native";
 const Products = ({item}) => {
   const navigation=useNavigation()
   const [loading,setLoading]=useState(false)
-  const [itemName,setItemName]=useState("Cupcakes")
   const [productImage,setProductImage]= useState(require("../assets/images/close-up-delicious-chocolate-cupcakes-with-raspberry.jpg"))
   const NavigateToItems =()=>{
     navigation.navigate("Items",{productImage,item})

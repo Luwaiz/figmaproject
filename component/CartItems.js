@@ -12,9 +12,7 @@ import { Ionicons } from "@expo/vector-icons";
 import React from 'react'
 import { useNavigation } from "@react-navigation/native";
 
-const CartItems = ({route,item,productId}) => {
- // const {item,productImag}=route.params
- 
+const CartItems = ({item,index}) => {
   return (
     <View>
         <View style={styles.CartItem}>
@@ -22,14 +20,14 @@ const CartItems = ({route,item,productId}) => {
             <Image style={styles.itemPic} source={require("../assets/images/close-up-delicious-chocolate-cupcakes-with-raspberry.jpg")}/>
             <View style={{width:245,backgroundColor:"white",alignItems:"center",paddingVertical:5}}>
             <View >
-                <View style={[styles.itemSum,{borderBottomWidth:0.5,borderTopWidth:0}]}><Text>Quantity</Text><Text>{props.item?.name}</Text></View>
-                <View style={styles.itemSum}><Text>Cost of 1 serving</Text><Text>{props.item?.price}</Text></View>
-                <View style={[styles.itemSum,{borderBottomWidth:0,borderTopWidth:0.5}]}><Text>Total cost</Text><Text>3</Text></View>
+                <View style={[styles.itemSum,{borderBottomWidth:0.5,borderTopWidth:0}]}><Text>Quantity</Text><Text>{item?.quantity}</Text></View>
+                <View style={styles.itemSum}><Text>Cost of 1 serving</Text><Text>${item?.product?.price}</Text></View>
+                <View style={[styles.itemSum,{borderBottomWidth:0,borderTopWidth:0.5}]}><Text>Total cost</Text><Text>${item?.price}</Text></View>
             </View>
             <TouchableOpacity style={styles.dropBtn}><Text style={{color:"white"}}>Drop item</Text></TouchableOpacity>
             </View>
         </View>
-            <View style={styles.itemName}><Text>Blueberry</Text></View>
+            <View style={styles.itemName}><Text>{item?.product?.name}</Text></View>
         </View>
     </View>
   )

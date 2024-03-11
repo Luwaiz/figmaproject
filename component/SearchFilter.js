@@ -1,17 +1,18 @@
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 
-const SearchFilter = ({data,searcher,setSearcher}) => {
+const SearchFilter = ({data,searcher,setSearcher,navigation}) => {
 
   return (
     <View style={styles.container}>
-      <FlatList data={data} renderItem={({item}) => {
-        if(searcher===""){
-            return null
-        }else if(item.name.toLowerCase().includes(searcher.toLowerCase())){
+    {searcher===""? (
+      <View style={{left:-100}}><Text style={{fontSize:16,fontFamily:"Lato"}}>"Search for product"</Text></View>
+    ):(
+      <View><FlatList data={data} renderItem={({item}) => {
+        if(item.name.toLowerCase().includes(searcher.toLowerCase())){
             return(
                 <View>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>navigation.navigate("Items",{item})}>
                 <View style={styles.products} >
                     <Text>{item.name}</Text>
                     </View>
@@ -19,7 +20,9 @@ const SearchFilter = ({data,searcher,setSearcher}) => {
                 </View>
             )
         }
-      }}/>
+      }}/></View>
+    )}
+      
     </View>
   )
 }
@@ -32,7 +35,7 @@ const styles = StyleSheet.create({
         height:"auto"
     },
     products:{
-        width:300,
+        width:330,
         backgroundColor:"rgba(71, 4, 64, 0.15)",
         marginVertical:5,
         paddingHorizontal:10,

@@ -12,20 +12,14 @@ import Products from "../component/Products";
 const UpdateProducts = ({route}) => {
   const navigation = useNavigation();
   const context = useContext(Context);
-  const {fromProductPage,fromAdminPage}=route.params
+  const {id}=route.params
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [productId, setProductId] = useState(products);
+  const [productId, setProductId] = useState(id);
 
-  if (fromProductPage){
-    console.log("true")
-    //const{name}=route.params
-  }else if(fromAdminPage){
-    console.log("false")
-  }
   
   const config = {
     headers: {
@@ -33,12 +27,17 @@ const UpdateProducts = ({route}) => {
     },
   };
 
-   const getProducts = async () => {
+   const Update = async () => {
+    const req={
+      name:productName,
+      price:parseFloat(price),
+      description:productDescription
+    }
      setLoading(true);
      try {
-       const response = await axios.get(API.product);
-       console.log(response?.data?.result?.products);
-       setProducts(response?.data?.result?.products);
+       const response = await axios.put(`${API.UpdateProducts}/${productId}`,req,config);
+       console.log(response?.data?.result?.products?.id);
+       navigation.navigate("ProductPage")
      } catch (e) {
        console.log(e);
        setLoading(false);
@@ -46,10 +45,6 @@ const UpdateProducts = ({route}) => {
        setLoading(false);
      }
    };
-   useEffect(() => {
-     getProducts();
-   }, []);
-
 
 
   return (
@@ -57,26 +52,8 @@ const UpdateProducts = ({route}) => {
       <View style={styles.topContainer}>
         <BackBtn />
       </View>
-
-      {/* //getting the id from the api
-      {products.map((item,index)=>(
-        <View key={index.toString()}>
-          <View><Text>{(index +1).toString()}</Text><Text>{item.id}</Text></View>
-        </View>
-        
-      ))} */}
         
       <View style={{ marginTop: 20 }}>
-      <View style={styles.cont}>
-          <Text style={styles.texts}>Product Id</Text>
-          <View style={styles.textBox}>
-            <TextInput
-              cursorColor={"#635D5D"}
-              placeholder="enter"
-              onChangeText={(text) => setProductId(text)}
-            />
-          </View>
-        </View>
         <View style={styles.cont}>
           <Text style={styles.texts}>Product Name</Text>
           <View style={styles.textBox}>
@@ -115,7 +92,7 @@ const UpdateProducts = ({route}) => {
         Btn={"Update product"}
         loading={loading}
         width={250}
-        onPress={getProducts}
+        onPress={Update}
       />
     </View>
   );

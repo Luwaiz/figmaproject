@@ -4,11 +4,11 @@ import { StyleSheet, Text, View,TouchableOpacity, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from '../screens/Home.js';
-import Next1 from '../screens/Next1';
-import Next2 from '../screens/Next2';
-import Signup from '../screens/Signup';
-import Login from '../screens/Login';
-import LandingPage from '../screens/LandingPage';
+import Next1 from '../screens/Next1.js';
+import Next2 from '../screens/Next2.js';
+import Signup from '../screens/Signup.js';
+import Login from '../screens/Login.js';
+import LandingPage from '../screens/LandingPage.js';
 import FoodPage from '../screens/FoodPage.js';
 import ProfilePage from '../screens/ProfilePage.js';
 import CartPage from '../screens/CartPage.js';
@@ -19,6 +19,8 @@ import AdminPage from '../screens/AdminPage.js';
 import CreateProd from '../screens/CreateProd.js';
 import ProductPage from '../screens/ProductPage.js';
 import UpdateProducts from '../screens/UpdateProducts.js';
+import SettingsPage from '../screens/SettingsPage.js';
+
 
 const Stack=createNativeStackNavigator()
 
@@ -34,7 +36,7 @@ const Navigation=({loggedIns})=> {
 function RootNavigator({loggedIns}){
     const[LoggedIn,setLoggedIn]=React.useState(loggedIns)
     return(
-        <Stack.Navigator initialRouteName='Signup'>
+        <Stack.Navigator initialRouteName='Login'>
         <Stack.Screen name='Home' component={Home} options={{headerShown:false}}/>
         <Stack.Screen name='Next1' component={Next1} options={{headerShown:false}}/>
         <Stack.Screen name='Next2' component={Next2} options={{headerShown:false}}/>
@@ -50,7 +52,8 @@ function RootNavigator({loggedIns}){
         <Stack.Screen name='AdminPage' component={AdminPage} options={{headerShown:false}}/>
         <Stack.Screen name='CreateProd' component={CreateProd} options={{headerShown:false}}/>
         <Stack.Screen name='ProductPage' component={ProductPage} options={{headerShown:false}}/>
-        <Stack.Screen name='UpdateProducts' component={UpdateProducts} options={{headerShown:false}}/>
+        <Stack.Screen name='UpdateProducts' component={UpdateProducts } options={{headerShown:false}}/>
+        <Stack.Screen name='SettingsPage' component={SettingsPage } options={{headerShown:false}}/>
 
         </Stack.Navigator>
     )
