@@ -19,8 +19,8 @@ const FoodPage = ({route}) => {
   const getProducts = async ()=>{
     setLoading(true)
     try{
-      const response = await axios.get(`${API.product}/${page}`)
-      console.log(response?.data?.result)
+      const response = await axios.get(API.product)
+      //console.log(response?.data?.result)
       setPage(page+1)
       setProducts(response?.data?.result?.products)
     }
@@ -36,7 +36,7 @@ const FoodPage = ({route}) => {
   }
   useEffect(()=>{
     getProducts()
-  },[page])
+  },[])
   return (
     <View style={styles.container}>
     {loading? (

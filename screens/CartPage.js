@@ -36,9 +36,6 @@ const CartPage = ({route}) => {
       setLoading(true)
       try{
         const response= await axios.get(`${API.orderDetails}/${id}`,config)
-        console.log(response?.data?.result?.lines)
-        const ordering= response?.data?.result?.lines
-        setOrders(ordering)
       }
       catch(e){
         console.log(e)
@@ -53,57 +50,45 @@ const CartPage = ({route}) => {
     useEffect(()=>{
       getOrders()
       
-    },[id])
+    },[])
 
-      // const listOrders =async()=>{
-      //   setLoading(true)
-      //   try{
-      //     const response= await axios.get(API.getOrder,config)
-      //     //console.log(response?.data?.result?.orders)
+      const listOrders =async()=>{
+        setLoading(true)
+        try{
+          const response= await axios.get(API.getOrder,config)
+          console.log(response?.data?.result?.orders)
+          setOrders(response?.data?.result?.orders)
+        }
+        catch(e){
+          console.log(e)
+          setLoading(false)
+        }
+        finally{
+          setLoading(false)
+        }
         
-      //   }
-      //   catch(e){
-      //     console.log(e)
-      //     setLoading(false)
-      //   }
-      //   finally{
-      //     setLoading(false)
-      //   }
-        
-      // }
+      }
   
-      // useEffect(()=>{
-      //   listOrders()
-      // },[])
+      useEffect(()=>{
+        listOrders()
+      },[])
 
-//start
-
-// const [cartItems, setCartItems] = useState([]);
-
-
-//   // Function to remove items from the cart
-//   const removeFromCart = (index) => {
-//     const newCartItems = [...cartItems];
-//     newCartItems.splice(index, 1);
-//     setCartItems(newCartItems);
-//   };
-
-//   return (
-//     <View>
-//       <Text>Cart</Text>
-    
-//         {cartItems.map((item, index) => (
-//           <ScrollView key={index}>
-//             <View>{item.name}</View>
-//             <View>{item.quantity}</View>
-//             <View>{item.price}</View>
-//           </ScrollView>
-//         ))}
-      
-//     </View>
-//   );
-
-// stop
+      const deleteOrders =async(itemId)=>{
+        setLoading(true)
+        try{
+          const response= await axios.put(`${API.deleteOrder}/${itemId}/cancel`,config)
+          console.log(response?.data)
+        }
+        catch(e){
+          console.log(e)
+          setLoading(false)
+        }
+        finally{
+          setLoading(false)
+        }
+        
+      }
+  
 
   return (
     <View style={styles.container}>

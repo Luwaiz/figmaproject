@@ -6,7 +6,19 @@ const SearchFilter = ({data,searcher,setSearcher,navigation}) => {
   return (
     <View style={styles.container}>
     {searcher===""? (
-      <View style={{left:-100}}><Text style={{fontSize:16,fontFamily:"Lato"}}>"Search for product"</Text></View>
+      <View><FlatList showsVerticalScrollIndicator={false} data={data} style={{height:670}} renderItem={({item}) => {
+        if(item.name.toLowerCase().includes(searcher.toLowerCase())){
+            return(
+                <View>
+                <TouchableOpacity onPress={()=>navigation.navigate("Items",{item})}>
+                <View style={styles.products} >
+                    <Text>{item.name}</Text>
+                    </View>
+                </TouchableOpacity>
+                </View>
+            )
+        }
+      }}/></View>
     ):(
       <View><FlatList data={data} renderItem={({item}) => {
         if(item.name.toLowerCase().includes(searcher.toLowerCase())){

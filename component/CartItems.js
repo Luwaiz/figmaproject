@@ -9,26 +9,31 @@ import {
     FlatList,
   } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigation } from "@react-navigation/native";
 
 const CartItems = ({item,index}) => {
   return (
-    <View>
-        <View style={styles.CartItem}>
+    <View key={index.toString()}>
+    <FlatList data={item?.lines}
+      renderItem={({item:lineItem,index})=>(
+      <View style={styles.CartItem} key={index.toString()}>
         <View style={styles.cartSpecs}>
             <Image style={styles.itemPic} source={require("../assets/images/close-up-delicious-chocolate-cupcakes-with-raspberry.jpg")}/>
             <View style={{width:245,backgroundColor:"white",alignItems:"center",paddingVertical:5}}>
             <View >
-                <View style={[styles.itemSum,{borderBottomWidth:0.5,borderTopWidth:0}]}><Text>Quantity</Text><Text>{item?.quantity}</Text></View>
-                <View style={styles.itemSum}><Text>Cost of 1 serving</Text><Text>${item?.product?.price}</Text></View>
-                <View style={[styles.itemSum,{borderBottomWidth:0,borderTopWidth:0.5}]}><Text>Total cost</Text><Text>${item?.price}</Text></View>
+                <View style={[styles.itemSum,{borderBottomWidth:0.5,borderTopWidth:0}]}><Text>Quantity</Text><Text>{lineItem?.quantity}</Text></View>
+                <View style={styles.itemSum}><Text>Cost of 1 serving</Text><Text>${lineItem?.product?.price}</Text></View>
+                <View style={[styles.itemSum,{borderBottomWidth:0,borderTopWidth:0.5}]}><Text>Total cost</Text><Text>${lineItem?.price}</Text></View>
             </View>
             <TouchableOpacity style={styles.dropBtn}><Text style={{color:"white"}}>Drop item</Text></TouchableOpacity>
             </View>
         </View>
-            <View style={styles.itemName}><Text>{item?.product?.name}</Text></View>
+            <View style={styles.itemName}><Text>{lineItem?.product?.name}</Text></View>
         </View>
+      )}
+    />
+
     </View>
   )
 }
@@ -43,7 +48,8 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderRadius:5,
         justifyContent:"space-between",
-        width:370
+        width:370,
+        marginVertical:5
     },
     
     itemSum:{

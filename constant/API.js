@@ -17,5 +17,6 @@ export default{
     //orders
     "placeOrder":`${url}/orders`,
     "getOrder":`${url}/orders`,
-    "orderDetails": `${url}/orders`
+    "orderDetails": `${url}/orders`,
+    "deleteOrder": `${url}/orders`
 }
