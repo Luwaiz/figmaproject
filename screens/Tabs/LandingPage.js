@@ -19,20 +19,19 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { Foundation } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useState, useContext, useEffect } from "react";
-import VSlider from "../component/vslider";
-import HSlider from "../component/HSlider";
+import VSlider from "../../component/vslider";
+import HSlider from "../../component/HSlider";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import Context from "../hooks/provider";
-import API from "../constant/API";
+import Context from "../../hooks/provider";
+import API from "../../constant/API";
 
-const LandingPage = ({ route, CatImage, CatName, ...props }) => {
+const LandingPage = ({ route, CatImage, CatName,navigation, ...props }) => {
   const context = useContext(Context);
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
-  const { Email, Username2, Password2 } = route?.params;
-  const navigation = useNavigation();
-  const Profile = require("../assets/blue-pancake.jpg");
+  
+  const Profile=require("../../assets/blue-pancake.jpg")
   const [profileOverlay, setProfileOverlay] = useState(false);
 
   const handleProfile = () => {
@@ -40,18 +39,6 @@ const LandingPage = ({ route, CatImage, CatName, ...props }) => {
   };
 
   
-  const NavigateToProfilePage = () => {
-    navigation.navigate("ProfilePage", {
-      Profile,
-      email,
-      Username2,
-      Password2,
-    });
-  };
-  const NavigateToCart = () => {
-    navigation.navigate("CartPage");
-  };
-
   const [Percentage, setPercentage] = useState(
     "Get 50% off on these new menus"
   );
@@ -138,15 +125,15 @@ const LandingPage = ({ route, CatImage, CatName, ...props }) => {
         >
           <HSlider
             PromoName={"Blueberry Pancakes"}
-            VImage={require("../assets/blue-pancake.jpg")}
+            VImage={require("../../assets/blue-pancake.jpg")}
           />
           <HSlider
             PromoName={"Raspberry Pancakes"}
-            VImage={require("../assets/rasp-pancake.jpg")}
+            VImage={require("../../assets/rasp-pancake.jpg")}
           />
           <HSlider
             PromoName={"Cream Coffee"}
-            VImage={require("../assets/coffee.jpg")}
+            VImage={require("../../assets/coffee.jpg")}
           />
         </ScrollView>
 
@@ -155,22 +142,22 @@ const LandingPage = ({ route, CatImage, CatName, ...props }) => {
         </View>
         <ScrollView style={{ marginBottom: 40 }}>
           <VSlider
-            CatImage={require("../assets/Ice-cream.jpg")}
+            CatImage={require("../../assets/Ice-cream.jpg")}
             CatName={"Desserts"}
             {...props}
           />
           <VSlider
-            CatImage={require("../assets/continental.jpg")}
+            CatImage={require("../../assets/continental.jpg")}
             CatName={"Main Dishes"}
             {...props}
           />
           <VSlider
-            CatImage={require("../assets/cocktails.jpg")}
+            CatImage={require("../../assets/cocktails.jpg")}
             CatName={"Cocktails"}
             {...props}
           />
           <VSlider
-            CatImage={require("../assets/blue-pancake.jpg")}
+            CatImage={require("../../assets/blue-pancake.jpg")}
             CatName={"Others"}
             {...props}
           />
@@ -178,7 +165,7 @@ const LandingPage = ({ route, CatImage, CatName, ...props }) => {
       </ScrollView>
 
       {/* bottom navbar */}
-      <View style={styles.Taskbar}>
+      {/* <View style={styles.Taskbar}>
         <TouchableOpacity onPress={NavigateToProfilePage}>
           <Ionicons name="person-sharp" size={24} color="white" />
         </TouchableOpacity>
@@ -193,7 +180,7 @@ const LandingPage = ({ route, CatImage, CatName, ...props }) => {
           <Foundation name="list" size={25} color="white" />
         </TouchableOpacity>
        
-      </View>
+      </View> */}
 
      
 
@@ -263,6 +250,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     borderColor: "#969090",
     borderWidth: 1,
+    marginBottom:20
     
   },
   search: {
@@ -283,8 +271,10 @@ const styles = StyleSheet.create({
     paddingRight: 240,
   },
   Percent: {
-    paddingTop: 20,
-    marginLeft: -140,
+    marginTop:10,
+    marginRight:"auto",
+    marginLeft:20
+   
   },
   Taskbar: {
     width: "100%",

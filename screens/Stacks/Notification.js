@@ -4,8 +4,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { Feather } from '@expo/vector-icons';
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import CheckMark from "../component/CheckMark";
-import BackBtn from "../component/BackBtn";
+import CheckMark from "../../component/CheckMark";
+import BackBtn from "../../component/BackBtn";
 
 const Notification = () => {
     const navigation=useNavigation()

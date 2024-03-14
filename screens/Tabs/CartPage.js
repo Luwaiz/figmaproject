@@ -10,13 +10,13 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import Buttons from "../component/Buttons";
+import Buttons from "../../component/Buttons";
+import CartItems from "../../component/CartItems";
 import React, { useContext, useEffect, useState } from "react";
-import CartItems from "../component/CartItems";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import API from "../constant/API";
-import Context from "../hooks/provider";
+import API from "../../constant/API";
+import Context from "../../hooks/provider";
 
 const CartPage = ({route}) => {
   const context=useContext(Context)

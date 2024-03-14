@@ -1,7 +1,7 @@
 import { StatusBar } from "react-native";
 import { StyleSheet, View, TouchableOpacity, Image, Text } from "react-native";
 import React, { useState } from "react";
-import Buttons from "../component/Buttons";
+import Buttons from "../../component/Buttons";
 
 const Home = ({ navigation }) => {
   const NavigateToNext1=()=>{

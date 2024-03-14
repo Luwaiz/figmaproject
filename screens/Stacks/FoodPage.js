@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
-import Products from "../component/Products";
-import BackBtn from "../component/BackBtn";
+import Products from "../../component/Products";
+import BackBtn from "../../component/BackBtn";
 import axios from "axios";
-import API from "../constant/API";
+import API from "../../constant/API";
 const {height,width}=Dimensions.get("screen")
 
 const FoodPage = ({route}) => {

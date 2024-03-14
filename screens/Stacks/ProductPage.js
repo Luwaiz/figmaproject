@@ -12,10 +12,10 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import AvailableProducts from "../component/AvailableProducts";
-import API from "../constant/API";
+import AvailableProducts from "../../component/AvailableProducts";
+import API from "../../constant/API";
 import { Ionicons } from '@expo/vector-icons';
-import BackBtn from "../component/BackBtn";
+import BackBtn from "../../component/BackBtn";
 import { Fontisto } from "@expo/vector-icons";
 const { height, width } = Dimensions.get("screen");
 

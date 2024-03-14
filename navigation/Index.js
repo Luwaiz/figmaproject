@@ -3,37 +3,44 @@ import * as React from 'react'
 import { StyleSheet, Text, View,TouchableOpacity, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from '../screens/Home.js';
-import Next1 from '../screens/Next1.js';
-import Next2 from '../screens/Next2.js';
-import Signup from '../screens/Signup.js';
-import Login from '../screens/Login.js';
-import LandingPage from '../screens/LandingPage.js';
-import FoodPage from '../screens/FoodPage.js';
-import ProfilePage from '../screens/ProfilePage.js';
-import CartPage from '../screens/CartPage.js';
-import Items from '../screens/Items.js';
-import SearchPage from '../screens/SearchPage.js';
-import Notification from '../screens/Notification.js';
-import AdminPage from '../screens/AdminPage.js';
-import CreateProd from '../screens/CreateProd.js';
-import ProductPage from '../screens/ProductPage.js';
-import UpdateProducts from '../screens/UpdateProducts.js';
-import SettingsPage from '../screens/SettingsPage.js';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Fontisto } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { Foundation } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Home from '../screens/Stacks/Home.js';
+import Next1 from '../screens/Stacks/Next1.js';
+import Next2 from '../screens/Stacks/Next2.js';
+import Signup from '../screens/Stacks/Signup.js';
+import Login from '../screens/Stacks/Login.js';
+import LandingPage from '../screens/Tabs/LandingPage.js';
+import FoodPage from '../screens/Stacks/FoodPage.js';
+import ProductPage from '../screens/Stacks/ProductPage.js';
+import CartPage from '../screens/Tabs/CartPage.js';
+import Items from '../screens/Stacks/Items.js';
+import SearchPage from '../screens/Tabs/SearchPage.js';
+import Notification from '../screens/Stacks/Notification.js';
+import AdminPage from '../screens/Stacks/AdminPage.js';
+import CreateProd from '../screens/Stacks/CreateProd.js';
+import UpdateProducts from '../screens/Stacks/UpdateProducts.js';
+import SettingsPage from '../screens/Tabs/SettingsPage.js';
+import ProfilePage from '../screens/Tabs/ProfilePage.js'
 
 
 const Stack=createNativeStackNavigator()
+const Tab=createBottomTabNavigator()
 
 const Navigation=({loggedIns})=> {
   
   return (
     <NavigationContainer>
-      <RootNavigator loggedIns={loggedIns}/>
+      <StackNavigator loggedIns={loggedIns}/>
     </NavigationContainer>
   );
 }
 
-function RootNavigator({loggedIns}){
+function StackNavigator({loggedIns}){
     const[LoggedIn,setLoggedIn]=React.useState(loggedIns)
     return(
         <Stack.Navigator initialRouteName='Login'>
@@ -42,20 +49,45 @@ function RootNavigator({loggedIns}){
         <Stack.Screen name='Next2' component={Next2} options={{headerShown:false}}/>
         <Stack.Screen name='Signup' component={Signup} options={{headerShown:false}}/>
         <Stack.Screen name='Login' component={Login} options={{headerShown:false}}/>
-        <Stack.Screen name='LandingPage' component={LandingPage} options={{headerShown:false}}/>
+        <Stack.Screen name='HomePage' component={HomePage} options={{headerShown:false}}/>
         <Stack.Screen name='FoodPage' component={FoodPage} options={{headerShown:false}}/>
-        <Stack.Screen name='ProfilePage' component={ProfilePage} options={{headerShown:false}}/>
-        <Stack.Screen name='CartPage' component={CartPage} options={{headerShown:false}}/>
         <Stack.Screen name='Items' component={Items} options={{headerShown:false}}/>
-        <Stack.Screen name='SearchPage' component={SearchPage} options={{headerShown:false}}/>
         <Stack.Screen name='Notification' component={Notification} options={{headerShown:false}}/>
         <Stack.Screen name='AdminPage' component={AdminPage} options={{headerShown:false}}/>
         <Stack.Screen name='CreateProd' component={CreateProd} options={{headerShown:false}}/>
         <Stack.Screen name='ProductPage' component={ProductPage} options={{headerShown:false}}/>
         <Stack.Screen name='UpdateProducts' component={UpdateProducts } options={{headerShown:false}}/>
-        <Stack.Screen name='SettingsPage' component={SettingsPage } options={{headerShown:false}}/>
-
         </Stack.Navigator>
     )
+}
+function HomePage ({loggedIns}){
+  const[LoggedIn,setLoggedIn]=React.useState(loggedIns)
+  return(
+    <Tab.Navigator screenOptions={{tabBarActiveTintColor:"red",tabBarInactiveTintColor:"green", tabBarShowLabel:false, tabBarStyle:{
+      backgroundColor:"#470440",
+      borderTopLeftRadius:20,
+      borderTopRightRadius:20,
+      position:'absolute',
+      bottom:0,
+      
+    }}} >
+    <Tab.Screen name='ProfilePage' component={ProfilePage} options={{headerShown:false,
+      tabBarIcon:({focused})=>(
+        <Ionicons name="person-sharp" size={focused?30:24} color="white" />)}}/>
+    <Tab.Screen name='SearchPage' component={SearchPage} options={{headerShown:false,
+      tabBarIcon:({focused})=>(
+        <Fontisto name="search" size={focused?30:24} color="white" />)}}/>
+    <Tab.Screen name='LandingPage' component={LandingPage} options={{headerShown:false,
+      tabBarIcon:({focused})=>(
+        <MaterialCommunityIcons name="home-outline" size={focused?45:35} color="white" />)}}/>
+    <Tab.Screen name='CartPage' component={CartPage} options={{headerShown:false,
+      tabBarIcon:({focused})=>(
+        <FontAwesome5 name="shopping-cart" size={focused?29:23} color="white" />)}}/>
+    <Tab.Screen name='SettingsPage' component={SettingsPage } options={{headerShown:false,
+      tabBarIcon:({focused})=>(
+        <Foundation name="list" size={focused?31:25} color="white" />)}}/>
+  </Tab.Navigator>
+  )
+
 }
 export default Navigation;

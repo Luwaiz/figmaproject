@@ -38,7 +38,7 @@ const HSlider = ({PromoName,VImage,...props}) => {
 const styles = StyleSheet.create({
     hSliderCont: {
         marginTop: 4,
-        marginHorizontal:16,
+        marginHorizontal:20,
       },
       Imagery: {
         height:100,

@@ -8,15 +8,15 @@ import {
   TextInput,
   Keyboard
 } from "react-native";
-import TextInputBox from "../component/TextInputBox";
-import Buttons from "../component/Buttons";
+import TextInputBox from "../../component/TextInputBox";
+import Buttons from "../../component/Buttons";
 import { FontAwesome } from '@expo/vector-icons';
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import API from "../constant/API";
-import Context from "../hooks/provider";
+import API from "../../constant/API";
+import Context from "../../hooks/provider";
 
-const Login = ({ navigation, route, }) => {
+const Login = ({ navigation}) => {
   const context=useContext(Context)
   const [loading, setLoading] = useState(false);
   
@@ -37,7 +37,9 @@ const Login = ({ navigation, route, }) => {
       if (Username2.trim()==="Splax@gmail.com"){
         navigation.navigate("AdminPage",{Username2})
       }else{
-      navigation.navigate("LandingPage", {Username2, Password2 });
+      navigation.navigate("HomePage",{
+        screen:"LandingPage",
+        params:{Username2, Password2} });
       }
     }catch(e){
       console.log(e)

@@ -7,11 +7,11 @@ import {
   Text,
   TextInput,
 } from "react-native";
-import TextInputBox from "../component/TextInputBox";
+import TextInputBox from "../../component/TextInputBox";
 import React, { useState } from "react";
-import Buttons from "../component/Buttons";
+import Buttons from "../../component/Buttons";
 import axios from "axios";
-import API from "../constant/API";
+import API from "../../constant/API";
 
 const Signup = ({ navigation }) => {
   const [loading, setLoading] = useState(false);

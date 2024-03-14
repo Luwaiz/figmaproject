@@ -4,8 +4,8 @@ import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
-import API from "../constant/API";
-import SearchFilter from "../component/SearchFilter";
+import API from "../../constant/API";
+import SearchFilter from "../../component/SearchFilter";
 
 const SearchPage = ({navigation}) => {
 
@@ -36,11 +36,6 @@ const SearchPage = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.topContainer}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back-circle-outline" size={40} color="black" />
-        </TouchableOpacity>
-      </View>
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.search}
@@ -88,6 +83,7 @@ const styles = StyleSheet.create({
     borderColor: "#969090",
     borderWidth: 1,
     marginBottom: 5,
+    marginTop: 50,
   },
   search: {
     width: 350,

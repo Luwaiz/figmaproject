@@ -5,11 +5,11 @@ import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-import Buttons from "../component/Buttons";
-import BackBtn from "../component/BackBtn";
+import Buttons from "../../component/Buttons";
+import BackBtn from "../../component/BackBtn";
 import axios from "axios";
-import API from "../constant/API";
-import Context from "../hooks/provider";
+import API from "../../constant/API";
+import Context from "../../hooks/provider";
 
 const Items = ({ route }) => {
   const navigation=useNavigation()

@@ -8,28 +8,59 @@ import {
   TouchableWithoutFeedback,
   Modal,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import React,{useState} from "react";
+import React,{useContext, useEffect, useState} from "react";
+import Context from "../../hooks/provider";
+import API from "../../constant/API";
+import axios from "axios";
 
 const ProfilePage = ({ navigation, route }) => {
-  const { Profile,email,Username2,Password2 } = route.params;
+
+  //const { email,Username2,Password2 } = route.params;
   const [profileOverlay, setProfileOverlay] = useState(false);
   const handleOverlay = () => {
     setProfileOverlay(!profileOverlay);
   };
+  const context = useContext(Context);
+  const [loading, setLoading] = useState(false);
+  const [email,setEmail]=useState("")
+  
+  const config = {
+    headers: {
+      Authorization: `Bearer ${context.token}`,
+    },
+  };
+  const getUser = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(API.profile, config);
+      console.log(response.data);
+      setEmail(response?.data?.result?.email);
+      setLoading(false);
+    } catch (e) {
+      console.log(e);
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back-circle-outline" size={40} color="black" />
-        </TouchableOpacity>
-        <TouchableOpacity>
+      <TouchableOpacity>
           <Text style={{ fontSize: 20, color: "#470440" }}>Edit</Text>
         </TouchableOpacity>
       </View>
-      <View style={{ marginBottom: 20 }}>
-        <TouchableOpacity onPress={handleOverlay}><Image source={Profile} style={styles.profilePic} /></TouchableOpacity>
+
+      {loading?(<ActivityIndicator color={"#470440"} size={"large"}/>):(
+        <>
+        <View style={{ marginBottom: 20 }}>
         <View style={{ bottom: 40, right: -130 }}>
           <Ionicons name="add-circle-sharp" size={42} color="#470440" />
         </View>
@@ -41,11 +72,11 @@ const ProfilePage = ({ navigation, route }) => {
         </View>
         <View style={styles.Titles}>
           <Text>Email</Text>
-          <Text>{email}</Text>
+          <Text></Text>
           </View>
           <View style={styles.Titles}>
           <Text>Password</Text>
-          <Text>{Password2}</Text>
+          <Text></Text>
           </View>
           <View style={[styles.Titles,{maxHeight:200}]}>
           <Text>Address</Text>
@@ -56,10 +87,11 @@ const ProfilePage = ({ navigation, route }) => {
           <Text></Text>
           </View>
       </View>
-      <View style={{bottom:-60,position:"absolute",alignItems:"center",}}>
+      <View style={{bottom:0,position:"absolute",alignItems:"center",}}>
         <Text style={{marginBottom:12,fontSize:14}}>Note: Changes can only be edited after 20 days</Text>
         <View style={{height:100,width:340,alignSelf:"center",borderTopWidth:2,borderTopColor:"#470440"}}></View>
-      </View>
+      </View></>)}
+    
       <Modal
         animationType="fade"
         transparent={true}
@@ -76,7 +108,7 @@ const ProfilePage = ({ navigation, route }) => {
             ]}
           >
             <View>
-              <Image style={styles.profileOverlay} source={Profile} />
+              <Image style={styles.profileOverlay} />
             </View>
           </View>
         </TouchableWithoutFeedback>

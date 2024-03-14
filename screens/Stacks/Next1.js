@@ -2,20 +2,20 @@ import { StatusBar } from "react-native";
 import { StyleSheet, View, TouchableOpacity, Image, Text } from "react-native";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import Buttons from "../component/Buttons";
+import Buttons from "../../component/Buttons";
 
-const Next2 = ({ navigation }) => {
-  const NavigateToSignup = () => {
-    navigation.replace("Signup");
+const Next1 = ({ navigation }) => {
+  const NavigateToNext2 = () => {
+    navigation.navigate("Next2");
   };
-  const [Header, setHeader] = useState("Quick Delivery");
+  const [Header, setHeader] = useState("Easy Payments");
   const [Subtext1, setSubtext1] = useState(
-    "Get your orders delivered to you in a matter of"
+    "Make your payments straight from your phone"
   );
-  const [Subtext2, setSubtext2] = useState("minutes");
+  const [Subtext2, setSubtext2] = useState("or just by scanning our QR code");
   // const [Imagery,setImagery]=useState(require("./assets/noodles.png"))
-  const [Spacer1, setSpacer1] = useState({ top: 40, right: -220 });
-  const [Spacer2, setSpacer2] = useState({ bottom: 190, left: -150 });
+  const [Spacer1, setSpacer1] = useState({ top: 40, left: -220 });
+  const [Spacer2, setSpacer2] = useState({ bottom: 190, right: -150 });
   return (
     <View style={styles.container}>
       <View style={[styles.circle1, { ...Spacer1 }]}></View>
@@ -34,7 +34,7 @@ const Next2 = ({ navigation }) => {
           <View style={styles.widget3}></View>
         </View>
       </View>
-      <Buttons Btn={"Next"} onPress={NavigateToSignup} width={350} />
+      <Buttons Btn={"Next"} onPress={NavigateToNext2} width={350} />
       <View style={[styles.circle2, { ...Spacer2 }]}></View>
       <StatusBar style="auto" />
     </View>
@@ -67,7 +67,6 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     paddingBottom: 16,
     fontSize: 20,
-    position: "relative",
   },
   text2: {
     color: "black",
@@ -110,14 +109,14 @@ const styles = StyleSheet.create({
   },
   widget2: {
     height: 8,
-    width: 8,
-    backgroundColor: "grey",
+    width: 22,
+    backgroundColor: "#470440",
     borderRadius: 15,
   },
   widget3: {
     height: 8,
-    width: 22,
-    backgroundColor: "#470440",
+    width: 8,
+    backgroundColor: "grey",
     borderRadius: 15,
   },
   backBtn: {
@@ -126,4 +125,4 @@ const styles = StyleSheet.create({
     left: 6,
   },
 });
-export default Next2;
+export default Next1;

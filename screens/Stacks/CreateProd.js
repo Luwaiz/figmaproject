@@ -1,12 +1,11 @@
 import { Keyboard, StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
-import Context from "../hooks/provider";
+import Context from "../../hooks/provider";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import API from "../constant/API";
-import Buttons from "../component/Buttons";
-import AdminPage from "./AdminPage";
-import BackBtn from "../component/BackBtn";
+import API from "../../constant/API";
+import Buttons from "../../component/Buttons";
+import BackBtn from "../../component/BackBtn";
 
 const CreateProd = () => {
   const navigation=useNavigation()
