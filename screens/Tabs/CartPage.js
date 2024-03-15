@@ -16,15 +16,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import API from "../../constant/API";
-import Context from "../../hooks/provider";
+import Context, { contexter } from "../../hooks/provider";
 
 const CartPage = ({route}) => {
-  const context=useContext(Context)
+  const context=contexter()
   const [loading,setLoading]=useState(false)
   const navigation = useNavigation();
   const {orderId}=route.params
   const id=orderId
-  const [orders,setOrders]=useState([])
+  
 
 
   const config = {
@@ -57,7 +57,7 @@ const CartPage = ({route}) => {
         try{
           const response= await axios.get(API.getOrder,config)
           console.log(response?.data?.result?.orders)
-          setOrders(response?.data?.result?.orders)
+          context?.setOrders(response?.data?.result?.orders)
         }
         catch(e){
           console.log(e)
@@ -98,12 +98,12 @@ const CartPage = ({route}) => {
         </TouchableOpacity>
       </View>
       <View>
-      {orders?(<Text>present</Text>):(<Text>absent</Text>)}
+      {context?.orders?(<Text>present</Text>):(<Text>absent</Text>)}
         <View>
       {loading?(<ActivityIndicator color={"#470440"} size={"large"}/>):(
         
         <FlatList
-        data={orders}
+        data={context?.orders}
         renderItem={({item,index})=><CartItems item={item} index={index.toString()}/>}
       />
         )}

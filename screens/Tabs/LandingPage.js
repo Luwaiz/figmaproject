@@ -23,15 +23,16 @@ import VSlider from "../../component/vslider";
 import HSlider from "../../component/HSlider";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import Context from "../../hooks/provider";
+import Context, { contexter } from "../../hooks/provider";
 import API from "../../constant/API";
 
 const LandingPage = ({ route, CatImage, CatName,navigation, ...props }) => {
-  const context = useContext(Context);
+  const context = contexter()
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   
-  const Profile=require("../../assets/blue-pancake.jpg")
+  
+  context.setProfilePic=require("../../assets/blue-pancake.jpg")
   const [profileOverlay, setProfileOverlay] = useState(false);
 
   const handleProfile = () => {
@@ -53,7 +54,8 @@ const LandingPage = ({ route, CatImage, CatName,navigation, ...props }) => {
     try {
       const response = await axios.get(API.profile, config);
       console.log(response.data);
-      setEmail(response?.data?.result?.email);
+      context.setEmail(response?.data?.result?.email);
+      
       setLoading(false);
     } catch (e) {
       console.log(e);
@@ -69,7 +71,7 @@ const LandingPage = ({ route, CatImage, CatName,navigation, ...props }) => {
   return (
     <View style={styles.container}>
       <View style={styles.heading}>
-        <Text style={styles.headText}>Welcome, {email.slice(0, -10)}!</Text>
+        <Text style={styles.headText}>Welcome, {context?.email.slice(0,-10)}!</Text>
         <View style={styles.profNotify}>
           <TouchableOpacity
             onPress={() => {
@@ -84,7 +86,7 @@ const LandingPage = ({ route, CatImage, CatName,navigation, ...props }) => {
             />
           </TouchableOpacity>
           <TouchableOpacity onPress={handleProfile}>
-            <Image style={styles.profile} source={Profile}></Image>
+            <Image style={styles.profile} source={context.setProfilePic}></Image>
           </TouchableOpacity>
         </View>
       </View>
@@ -201,7 +203,7 @@ const LandingPage = ({ route, CatImage, CatName,navigation, ...props }) => {
             ]}
           >
             <View>
-              <Image style={styles.profileOverlay} source={Profile} />
+              <Image style={styles.profileOverlay} source={context.setProfilePic} />
             </View>
           </View>
         </TouchableWithoutFeedback>

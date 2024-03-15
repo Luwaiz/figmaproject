@@ -9,11 +9,11 @@ import Buttons from "../../component/Buttons";
 import BackBtn from "../../component/BackBtn";
 import axios from "axios";
 import API from "../../constant/API";
-import Context from "../../hooks/provider";
+import Context, { contexter } from "../../hooks/provider";
 
 const Items = ({ route }) => {
   const navigation=useNavigation()
-  const context=useContext(Context);
+  const context=contexter()
   const [loading,setLoading]=useState(false);
   const { productImage, item } = route.params;
   const [quantity, setQuantity] = useState(0);

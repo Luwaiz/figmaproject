@@ -14,10 +14,10 @@ import { FontAwesome } from '@expo/vector-icons';
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import API from "../../constant/API";
-import Context from "../../hooks/provider";
+import Context, { contexter } from "../../hooks/provider";
 
 const Login = ({ navigation}) => {
-  const context=useContext(Context)
+  const context=contexter()
   const [loading, setLoading] = useState(false);
   
   const NavigateToLandingPage = async() => {

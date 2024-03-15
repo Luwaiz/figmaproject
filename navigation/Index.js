@@ -50,8 +50,6 @@ function StackNavigator({loggedIns}){
         <Stack.Screen name='Signup' component={Signup} options={{headerShown:false}}/>
         <Stack.Screen name='Login' component={Login} options={{headerShown:false}}/>
         <Stack.Screen name='HomePage' component={HomePage} options={{headerShown:false}}/>
-        <Stack.Screen name='FoodPage' component={FoodPage} options={{headerShown:false}}/>
-        <Stack.Screen name='Items' component={Items} options={{headerShown:false}}/>
         <Stack.Screen name='Notification' component={Notification} options={{headerShown:false}}/>
         <Stack.Screen name='AdminPage' component={AdminPage} options={{headerShown:false}}/>
         <Stack.Screen name='CreateProd' component={CreateProd} options={{headerShown:false}}/>
@@ -60,32 +58,42 @@ function StackNavigator({loggedIns}){
         </Stack.Navigator>
     )
 }
-function HomePage ({loggedIns}){
-  const[LoggedIn,setLoggedIn]=React.useState(loggedIns)
+
+function Landing(){
+  return(
+    <Stack.Navigator screenOptions={{headerShown:false}}>
+      <Stack.Screen name='LandingPage' component={LandingPage}/>
+      <Stack.Screen name='FoodPage' component={FoodPage} />
+      <Stack.Screen name='Items' component={Items} />
+      <Stack.Screen name='CartPage' component={CartPage} />
+
+    </Stack.Navigator>
+  )
+}
+function HomePage (){
+  
   return(
     <Tab.Navigator screenOptions={{tabBarActiveTintColor:"red",tabBarInactiveTintColor:"green", tabBarShowLabel:false, tabBarStyle:{
       backgroundColor:"#470440",
       borderTopLeftRadius:20,
       borderTopRightRadius:20,
-      position:'absolute',
-      bottom:0,
-      
+      height:55
     }}} >
     <Tab.Screen name='ProfilePage' component={ProfilePage} options={{headerShown:false,
       tabBarIcon:({focused})=>(
-        <Ionicons name="person-sharp" size={focused?30:24} color="white" />)}}/>
+        <Ionicons name="person-sharp" size={focused?30:22} color="white" />)}}/>
     <Tab.Screen name='SearchPage' component={SearchPage} options={{headerShown:false,
       tabBarIcon:({focused})=>(
-        <Fontisto name="search" size={focused?30:24} color="white" />)}}/>
-    <Tab.Screen name='LandingPage' component={LandingPage} options={{headerShown:false,
+        <Fontisto name="search" size={focused?30:22} color="white" />)}}/>
+    <Tab.Screen name='Landing' component={Landing} options={{headerShown:false,
       tabBarIcon:({focused})=>(
-        <MaterialCommunityIcons name="home-outline" size={focused?45:35} color="white" />)}}/>
+        <MaterialCommunityIcons name="home-outline" size={focused?45:33} color="white" />)}}/>
     <Tab.Screen name='CartPage' component={CartPage} options={{headerShown:false,
       tabBarIcon:({focused})=>(
-        <FontAwesome5 name="shopping-cart" size={focused?29:23} color="white" />)}}/>
+        <FontAwesome5 name="shopping-cart" size={focused?29:21} color="white" />)}}/>
     <Tab.Screen name='SettingsPage' component={SettingsPage } options={{headerShown:false,
       tabBarIcon:({focused})=>(
-        <Foundation name="list" size={focused?31:25} color="white" />)}}/>
+        <Foundation name="list" size={focused?31:23} color="white" />)}}/>
   </Tab.Navigator>
   )
 

@@ -12,44 +12,19 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import React,{useContext, useEffect, useState} from "react";
-import Context from "../../hooks/provider";
+import Context, { contexter } from "../../hooks/provider";
 import API from "../../constant/API";
 import axios from "axios";
 
-const ProfilePage = ({ navigation, route }) => {
+const ProfilePage = () => {
 
-  //const { email,Username2,Password2 } = route.params;
   const [profileOverlay, setProfileOverlay] = useState(false);
   const handleOverlay = () => {
     setProfileOverlay(!profileOverlay);
   };
-  const context = useContext(Context);
+  const context = contexter()
   const [loading, setLoading] = useState(false);
-  const [email,setEmail]=useState("")
-  
-  const config = {
-    headers: {
-      Authorization: `Bearer ${context.token}`,
-    },
-  };
-  const getUser = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.get(API.profile, config);
-      console.log(response.data);
-      setEmail(response?.data?.result?.email);
-      setLoading(false);
-    } catch (e) {
-      console.log(e);
-      setLoading(false);
-    } finally {
-      setLoading(false);
-    }
-  };
 
-  useEffect(() => {
-    getUser();
-  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -61,18 +36,21 @@ const ProfilePage = ({ navigation, route }) => {
       {loading?(<ActivityIndicator color={"#470440"} size={"large"}/>):(
         <>
         <View style={{ marginBottom: 20 }}>
+        <TouchableOpacity onPress={handleOverlay}>
+        <Image style={styles.profilePic} source={context.setProfilePic}/>
         <View style={{ bottom: 40, right: -130 }}>
           <Ionicons name="add-circle-sharp" size={42} color="#470440" />
         </View>
+        </TouchableOpacity>
       </View>
       <View style={{ width: "100%", alignSelf: "center", paddingHorizontal:10}}>
         <View style={styles.Titles}>
           <Text>Username</Text>
-          <Text>{email}</Text>
+          <Text>{context?.email.slice(0,-10)}</Text>
         </View>
         <View style={styles.Titles}>
           <Text>Email</Text>
-          <Text></Text>
+          <Text>{context?.email}</Text>
           </View>
           <View style={styles.Titles}>
           <Text>Password</Text>
@@ -87,7 +65,7 @@ const ProfilePage = ({ navigation, route }) => {
           <Text></Text>
           </View>
       </View>
-      <View style={{bottom:0,position:"absolute",alignItems:"center",}}>
+      <View style={{alignItems:"center",marginTop:"auto",bottom:-80}}>
         <Text style={{marginBottom:12,fontSize:14}}>Note: Changes can only be edited after 20 days</Text>
         <View style={{height:100,width:340,alignSelf:"center",borderTopWidth:2,borderTopColor:"#470440"}}></View>
       </View></>)}
@@ -108,7 +86,7 @@ const ProfilePage = ({ navigation, route }) => {
             ]}
           >
             <View>
-              <Image style={styles.profileOverlay} />
+              <Image style={styles.profileOverlay} source={context.setProfilePic}/>
             </View>
           </View>
         </TouchableWithoutFeedback>
