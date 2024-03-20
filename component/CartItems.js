@@ -7,11 +7,12 @@ import {
     Button,
     ScrollView,
     FlatList,
+    Dimensions,
   } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from 'react'
 import { useNavigation } from "@react-navigation/native";
-
+const {width,height}=Dimensions.get("screen")
 const CartItems = ({item,index}) => {
   return (
     <View key={index.toString()}>
@@ -19,8 +20,8 @@ const CartItems = ({item,index}) => {
       renderItem={({item:lineItem,index})=>(
       <View style={styles.CartItem} key={index.toString()}>
         <View style={styles.cartSpecs}>
-            <Image style={styles.itemPic} source={require("../assets/images/close-up-delicious-chocolate-cupcakes-with-raspberry.jpg")}/>
-            <View style={{width:245,backgroundColor:"white",alignItems:"center",paddingVertical:5}}>
+           <Image style={styles.itemPic} source={require("../assets/images/close-up-delicious-chocolate-cupcakes-with-raspberry.jpg")}/>
+            <View style={{backgroundColor:"white",alignItems:"center",paddingVertical:5,paddingHorizontal:5}}>
             <View >
                 <View style={[styles.itemSum,{borderBottomWidth:0.5,borderTopWidth:0}]}><Text>Quantity</Text><Text>{lineItem?.quantity}</Text></View>
                 <View style={styles.itemSum}><Text>Cost of 1 serving</Text><Text>${lineItem?.product?.price}</Text></View>
@@ -47,9 +48,9 @@ const styles = StyleSheet.create({
         backgroundColor:"#898A8D",
         borderWidth:1,
         borderRadius:5,
-        justifyContent:"space-between",
-        width:370,
-        marginVertical:5
+        width:width-16,
+        marginVertical:5,
+        paddingHorizontal:5
     },
     
     itemSum:{
@@ -75,7 +76,6 @@ const styles = StyleSheet.create({
     itemName:{
       backgroundColor:"white",
       marginVertical:5,
-      marginHorizontal:5,
       paddingLeft:10,
       height:30,
       justifyContent:"center"
@@ -83,9 +83,8 @@ const styles = StyleSheet.create({
     cartSpecs:{
       flexDirection:"row",
       marginTop:5,
-      paddingHorizontal:5,
-      width:370,
-      justifyContent:"space-between"
+      justifyContent:"space-between",
+      
     }
 })
 export default CartItems

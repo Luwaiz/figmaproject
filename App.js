@@ -9,15 +9,14 @@ import { ContextProvider } from './hooks/provider';
 
 const App=()=> {
   const isLoadingComplete=UseCachedResources();
-  const [isLoggedIn,setLoggedIn]=useState(false);
   if(!isLoadingComplete){
     return null;
   }else{
   return(
     <SafeAreaProvider>
     <ContextProvider>
-    <Navigation loggedIns={isLoggedIn}/>
-    <StatusBar/> 
+    <Navigation/>
+    <StatusBar/>
     </ContextProvider>
     </SafeAreaProvider>
   )};

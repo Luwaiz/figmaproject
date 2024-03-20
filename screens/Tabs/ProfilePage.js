@@ -15,9 +15,10 @@ import React,{useContext, useEffect, useState} from "react";
 import Context, { contexter } from "../../hooks/provider";
 import API from "../../constant/API";
 import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
 
 const ProfilePage = () => {
-
+  const navigation=useNavigation()
   const [profileOverlay, setProfileOverlay] = useState(false);
   const handleOverlay = () => {
     setProfileOverlay(!profileOverlay);
@@ -28,16 +29,16 @@ const ProfilePage = () => {
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
-      <TouchableOpacity>
-          <Text style={{ fontSize: 20, color: "#470440" }}>Edit</Text>
-        </TouchableOpacity>
+          <Text onPress={()=>{
+            context.setLoggedIn(false),
+            context.setToken("")}} style={{ fontSize: 20, color: "#470440" }}>Edit</Text>
       </View>
 
       {loading?(<ActivityIndicator color={"#470440"} size={"large"}/>):(
         <>
         <View style={{ marginBottom: 20 }}>
         <TouchableOpacity onPress={handleOverlay}>
-        <Image style={styles.profilePic} source={context.setProfilePic}/>
+          <Image style={styles.profilePic} source={context.setProfilePic}/>
         <View style={{ bottom: 40, right: -130 }}>
           <Ionicons name="add-circle-sharp" size={42} color="#470440" />
         </View>

@@ -1,6 +1,6 @@
 import { Keyboard, StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
-import Context from "../../hooks/provider";
+import Context, { contexter } from "../../hooks/provider";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import API from "../../constant/API";
@@ -11,7 +11,7 @@ import Products from "../../component/Products";
 
 const UpdateProducts = ({route}) => {
   const navigation = useNavigation();
-  const context = useContext(Context);
+  const context = contexter()
   const {id}=route.params
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);

@@ -1,4 +1,5 @@
 import {
+  Dimensions,
   Modal,
   RefreshControl,
   StatusBar,
@@ -25,13 +26,11 @@ import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import Context, { contexter } from "../../hooks/provider";
 import API from "../../constant/API";
+const {width,height}=Dimensions.get("screen")
 
 const LandingPage = ({ route, CatImage, CatName,navigation, ...props }) => {
   const context = contexter()
   const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState("");
-  
-  
   context.setProfilePic=require("../../assets/blue-pancake.jpg")
   const [profileOverlay, setProfileOverlay] = useState(false);
 
@@ -54,8 +53,6 @@ const LandingPage = ({ route, CatImage, CatName,navigation, ...props }) => {
     try {
       const response = await axios.get(API.profile, config);
       console.log(response.data);
-      context.setEmail(response?.data?.result?.email);
-      
       setLoading(false);
     } catch (e) {
       console.log(e);
@@ -68,6 +65,7 @@ const LandingPage = ({ route, CatImage, CatName,navigation, ...props }) => {
   useEffect(() => {
     getUser();
   }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.heading}>
@@ -142,7 +140,7 @@ const LandingPage = ({ route, CatImage, CatName,navigation, ...props }) => {
         <View style={styles.categoryCont}>
           <Text style={styles.categoryTxt}>Categories</Text>
         </View>
-        <ScrollView style={{ marginBottom: 40 }}>
+        <ScrollView style={{ marginBottom:10}}>
           <VSlider
             CatImage={require("../../assets/Ice-cream.jpg")}
             CatName={"Desserts"}
@@ -218,17 +216,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   heading: {
-    marginTop: 40,
-    width: "100%",
+    marginTop: 30,
+    width: width,
     height: 50,
     paddingHorizontal: 16,
     justifyContent: "space-between",
+    alignItems:"center",
     flexDirection: "row",
   },
   headText: {
-    fontSize: 25,
+    fontSize: 23,
     fontWeight: "bold",
-    top: 10,
+    
   },
   profile: {
     width: 50,
@@ -238,10 +237,12 @@ const styles = StyleSheet.create({
     borderWidth: 3,
   },
   profNotify: {
+    marginLeft:10,
     flexDirection: "row",
+    alignItems:"center"
   },
   notify: {
-    top: 15,
+    
     paddingRight: 5,
   },
   inputContainer: {
@@ -256,7 +257,7 @@ const styles = StyleSheet.create({
     
   },
   search: {
-    width: 370,
+    width: width-20,
     height: 50,
     paddingLeft: 16,
   },
@@ -269,8 +270,9 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
   categoryCont: {
-    paddingVertical: 15,
-    paddingRight: 240,
+    marginRight:"auto",
+    marginLeft:20,
+    marginBottom:10
   },
   Percent: {
     marginTop:10,

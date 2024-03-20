@@ -9,9 +9,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Foundation } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Home from '../screens/Stacks/Home.js';
-import Next1 from '../screens/Stacks/Next1.js';
-import Next2 from '../screens/Stacks/Next2.js';
 import Signup from '../screens/Stacks/Signup.js';
 import Login from '../screens/Stacks/Login.js';
 import LandingPage from '../screens/Tabs/LandingPage.js';
@@ -26,29 +23,36 @@ import CreateProd from '../screens/Stacks/CreateProd.js';
 import UpdateProducts from '../screens/Stacks/UpdateProducts.js';
 import SettingsPage from '../screens/Tabs/SettingsPage.js';
 import ProfilePage from '../screens/Tabs/ProfilePage.js'
+import { contexter } from '../hooks/provider.js';
+import OnBoard from '../screens/Stacks/OnBoard.js';
 
 
 const Stack=createNativeStackNavigator()
 const Tab=createBottomTabNavigator()
 
-const Navigation=({loggedIns})=> {
-  
+const Navigation=()=> {
+  const context = contexter()
   return (
     <NavigationContainer>
-      <StackNavigator loggedIns={loggedIns}/>
+    {context?.loggedIn===false? (<LoggedOutScreen/>):(<LoggedInScreen/>)}
     </NavigationContainer>
   );
 }
 
-function StackNavigator({loggedIns}){
-    const[LoggedIn,setLoggedIn]=React.useState(loggedIns)
+
+function LoggedOutScreen(){
     return(
-        <Stack.Navigator initialRouteName='Login'>
-        <Stack.Screen name='Home' component={Home} options={{headerShown:false}}/>
-        <Stack.Screen name='Next1' component={Next1} options={{headerShown:false}}/>
-        <Stack.Screen name='Next2' component={Next2} options={{headerShown:false}}/>
+        <Stack.Navigator initialRouteName='OnBoard'>
+        <Stack.Screen name='OnBoard' component={OnBoard} options={{headerShown:false}}/>
         <Stack.Screen name='Signup' component={Signup} options={{headerShown:false}}/>
         <Stack.Screen name='Login' component={Login} options={{headerShown:false}}/>
+        </Stack.Navigator>
+    )
+}
+
+function LoggedInScreen(){
+  return(
+    <Stack.Navigator>
         <Stack.Screen name='HomePage' component={HomePage} options={{headerShown:false}}/>
         <Stack.Screen name='Notification' component={Notification} options={{headerShown:false}}/>
         <Stack.Screen name='AdminPage' component={AdminPage} options={{headerShown:false}}/>
@@ -56,46 +60,78 @@ function StackNavigator({loggedIns}){
         <Stack.Screen name='ProductPage' component={ProductPage} options={{headerShown:false}}/>
         <Stack.Screen name='UpdateProducts' component={UpdateProducts } options={{headerShown:false}}/>
         </Stack.Navigator>
-    )
-}
-
+  )
+  }
 function Landing(){
   return(
     <Stack.Navigator screenOptions={{headerShown:false}}>
       <Stack.Screen name='LandingPage' component={LandingPage}/>
       <Stack.Screen name='FoodPage' component={FoodPage} />
       <Stack.Screen name='Items' component={Items} />
-      <Stack.Screen name='CartPage' component={CartPage} />
-
     </Stack.Navigator>
   )
 }
 function HomePage (){
   
   return(
-    <Tab.Navigator screenOptions={{tabBarActiveTintColor:"red",tabBarInactiveTintColor:"green", tabBarShowLabel:false, tabBarStyle:{
+    <Tab.Navigator initialRouteName='Landing' screenOptions={{tabBarActiveTintColor:"red",tabBarInactiveTintColor:"green", tabBarShowLabel:false, tabBarStyle:{
       backgroundColor:"#470440",
       borderTopLeftRadius:20,
       borderTopRightRadius:20,
-      height:55
+      height:55,
+      
     }}} >
     <Tab.Screen name='ProfilePage' component={ProfilePage} options={{headerShown:false,
       tabBarIcon:({focused})=>(
-        <Ionicons name="person-sharp" size={focused?30:22} color="white" />)}}/>
+        <View style={[focused? styles.activeIndicator : styles.inActiveIndicator]}>
+          <Ionicons name="person-sharp" size={22} color={focused?"#470440":"white"} />
+        </View>
+        )}}/>
     <Tab.Screen name='SearchPage' component={SearchPage} options={{headerShown:false,
       tabBarIcon:({focused})=>(
-        <Fontisto name="search" size={focused?30:22} color="white" />)}}/>
+        <View style={[focused? styles.activeIndicator : styles.inActiveIndicator]}>
+          <Fontisto name="search" size={22} color={focused?"#470440":"white"} />
+        </View>
+        )}}/>
     <Tab.Screen name='Landing' component={Landing} options={{headerShown:false,
       tabBarIcon:({focused})=>(
-        <MaterialCommunityIcons name="home-outline" size={focused?45:33} color="white" />)}}/>
+        <View style={[focused? styles.activeIndicator : styles.inActiveIndicator]}>
+          <MaterialCommunityIcons name="home-outline" size={33} color={focused?"#470440":"white"} />
+        </View>
+        )}}/>
     <Tab.Screen name='CartPage' component={CartPage} options={{headerShown:false,
       tabBarIcon:({focused})=>(
-        <FontAwesome5 name="shopping-cart" size={focused?29:21} color="white" />)}}/>
+        <View style={[focused? styles.activeIndicator : styles.inActiveIndicator]}>
+          <FontAwesome5 name="shopping-cart" size={21} color={focused?"#470440":"white"} />
+        </View>
+        )}}/>
     <Tab.Screen name='SettingsPage' component={SettingsPage } options={{headerShown:false,
       tabBarIcon:({focused})=>(
-        <Foundation name="list" size={focused?31:23} color="white" />)}}/>
+        <View style={[focused? styles.activeIndicator : styles.inActiveIndicator]}>
+          <Foundation name="list" size={23} color={focused?"#470440":"white"} />
+        </View>
+        )}}/>
   </Tab.Navigator>
   )
 
 }
+
+const styles=StyleSheet.create({
+  activeIndicator:{
+    height:40,
+    width:40,
+    backgroundColor:"white",
+    borderRadius:100,
+    justifyContent:"center",
+    alignItems:"center"
+  },
+  inActiveIndicator:{
+    height:40,
+    width:40,
+    backgroundColor:"#470440",
+    borderRadius:100,
+    justifyContent:"center",
+    alignItems:"center"
+  }
+})
 export default Navigation;

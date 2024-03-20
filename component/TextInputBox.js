@@ -1,4 +1,4 @@
-import { StatusBar } from "react-native";
+import { Dimensions, StatusBar } from "react-native";
 import {
   StyleSheet,
   View,
@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import React, { useState } from "react";
+const {width, height}=Dimensions.get("screen")
 
 const TextInputBox = ({ secureTextEntry,keyboardType,onChangeText,placeholder,passwordRules,password,...props}) => {
   const [hidePassword, setHidePassword] = React.useState(!password);
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
         alignItems:"center",
         borderWidth: 0.5,
         height: 55,
-        width: 361,
+        width: width-30,
         paddingHorizontal: 20,
         borderRadius: 15,
         backgroundColor: "white",

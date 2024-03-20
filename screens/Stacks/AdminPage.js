@@ -21,13 +21,12 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import Context from "../../hooks/provider";
+import Context, { contexter } from "../../hooks/provider";
 import API from "../../constant/API";
 
 const AdminPage = ({ route }) => {
-  const context = useContext(Context);
+  const context = contexter()
   const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState("");
   const navigation = useNavigation();
   const Profile = require("../../assets/blue-pancake.jpg");
   const [profileOverlay, setProfileOverlay] = useState(false);
@@ -45,7 +44,6 @@ const AdminPage = ({ route }) => {
     try {
       const response = await axios.get(API.profile, config);
       console.log(response.data);
-      setEmail(response?.data?.result?.email);
       setLoading(false);
     } catch (e) {
       console.log(e);

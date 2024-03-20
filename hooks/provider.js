@@ -8,10 +8,11 @@ export function contexter () {
 }
 
  export function ContextProvider ({children}){
-    const [loggedIn,setLoggedIn]=useState("")
+    const [loggedIn,setLoggedIn]=useState(false)
     const [email,setEmail]=useState("")
     const [token,setToken]=useState("")
-    const [profilePic,setProfilePic]=useState("")
+    const [orderId,setOrderId]=useState("")
+    const [profilePic,setProfilePic]=useState()
     const [orders,setOrders]=useState([])
     const userContext={
       token,
@@ -23,7 +24,9 @@ export function contexter () {
       loggedIn,
       setLoggedIn,
       orders,
-      setOrders
+      setOrders,
+      orderId,
+      setOrderId
     }
     return(
     <Context.Provider value={userContext}>

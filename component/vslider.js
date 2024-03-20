@@ -5,11 +5,13 @@ import {
   Image,
   Text,
   ActivityIndicator,
+  Dimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import React, { useState } from "react";
+const {width,height}=Dimensions.get("screen")
 
 const VSlider = ({ CatName, CatImage, ...props }) => {
   const [loading, setLoading] = useState(true);
@@ -57,7 +59,7 @@ const VSlider = ({ CatName, CatImage, ...props }) => {
 const styles = StyleSheet.create({
   VSlider: {
     height: 270,
-    width: 350,
+    width: width-26,
   },
   VSliderCont: {
     borderRadius: 20,
@@ -65,7 +67,7 @@ const styles = StyleSheet.create({
   },
   Imaging: {
     height: 270,
-    width: 350,
+    width: width-26,
     borderRadius: 20,
   },
   description: {

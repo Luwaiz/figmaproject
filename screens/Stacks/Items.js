@@ -24,7 +24,7 @@ const Items = ({ route }) => {
   const productId=items.id
   const code=items.code.toString()
   const status=items.status
-  const [orderId,setOrderId]=useState("")
+  
 
   const config = {
     headers: {
@@ -64,8 +64,8 @@ const Items = ({ route }) => {
       const response = await axios.post(API.placeOrder,req,config)
       console.log(response?.data?.result)
       const newOrderId=response?.data?.result?.id.toString()
-      setOrderId(newOrderId)
-      navigation.navigate("CartPage",{orderId})
+      context?.setOrderId(newOrderId)
+      navigation.navigate("CartPage")
     }
     catch(e){
       console.log(e)
@@ -77,7 +77,7 @@ const Items = ({ route }) => {
   }
   
 useEffect(()=>{
-},[orderId])
+},[context?.orderId])
 
   //quantity counter
   const DecreaseQuantity = () => {

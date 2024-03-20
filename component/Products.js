@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image,ActivityIndicator } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image,ActivityIndicator, Dimensions } from "react-native";
 import React, { useState,useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
+const {width,height}=Dimensions.get("screen")
 
 
 const Products = ({item}) => {
@@ -42,7 +43,7 @@ const Products = ({item}) => {
 
 const styles = StyleSheet.create({
     Product: {
-    width: 170,
+    width: width/2 -20,
     height: 200,
     justifyContent:"space-between",
     backgroundColor: "white",
@@ -52,13 +53,13 @@ const styles = StyleSheet.create({
   },
   innerProduct: {
     height: 40,
-    width: 170,
     backgroundColor: "#D9D9D9",
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     borderTopWidth: 1,
     borderColor: "#470440",
     alignItems:"center",
+    justifyContent:"center"
     
   },
   ProductImagery: {
@@ -71,8 +72,7 @@ const styles = StyleSheet.create({
     borderColor: "#470440",
   },
   productName: {
-    paddingTop: 15,
-    height:200
+    color:"black"
   },
 })
 export default Products

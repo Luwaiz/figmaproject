@@ -1,4 +1,4 @@
-import { StatusBar } from "react-native";
+import { Dimensions, StatusBar } from "react-native";
 import {
   StyleSheet,
   View,
@@ -15,6 +15,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import API from "../../constant/API";
 import Context, { contexter } from "../../hooks/provider";
+const {width,height}=Dimensions.get("screen")
 
 const Login = ({ navigation}) => {
   const context=contexter()
@@ -32,14 +33,20 @@ const Login = ({ navigation}) => {
 
       const response= await axios.post(API.log_in, req)
       console.log(response?.data?.result)
+      context.setEmail(response?.data?.result?.user?.email)
       context.setToken(response?.data?.result?.access_token)
-
-      if (Username2.trim()==="Splax@gmail.com"){
-        navigation.navigate("AdminPage",{Username2})
+      if(context.setToken===""){
+        context.setLoggedIn(false)
+      }else if(context.setToken!=="" && context.email==="Splax@gmail.com"){
+        context.setLoggedIn(true)
+        navigation.navigate("AdminPage")
       }else{
-      navigation.navigate("HomePage",{
-        screen:"LandingPage",
-        params:{Username2, Password2} });
+        context.setLoggedIn(true)
+        navigation.navigate("HomePage",{
+          screen:"Landing",
+          initial:true,params:{
+            screen:"LandingPage"}}
+            );
       }
     }catch(e){
       console.log(e)
@@ -52,7 +59,6 @@ const Login = ({ navigation}) => {
   
   const [Password2, setPassword2] = useState("");
   const [Username2, setUsername2] = useState("");
-  const [secure,setSecure]=useState(true)
   const [Spacer2, setSpacer2] = useState({ bottom: 170, right: -150 });
   const [Spacer3, setSpacer3] = useState({ bottom: -90, left: -120 });
 
@@ -105,16 +111,19 @@ const styles = StyleSheet.create({
   },
   Circle1: {
     backgroundColor: "#470440",
-    height: 440,
-    width: 440,
-    borderRadius: 600,
-    top: -200,
+    height:height/4,
+    width: width,
+    borderBottomLeftRadius:300,
+    borderBottomRightRadius:300,
+    justifyContent:"center",
+    alignItems:"center",
+    marginBottom:50
   },
   accTxt1: {
     marginTop:140
   },
   mainBody: {
-    marginTop: -150,
+    flex:1,
     alignItems: "center",
   },
   accTxt2: {
@@ -139,12 +148,11 @@ const styles = StyleSheet.create({
     fontSize: 50,
     color: "white",
     textAlign:"center",
-    bottom:-330,
     fontFamily:"Lato",
     fontWeight:"600"
   },
   FgtPassword:{
-    marginRight:-230,
+    marginLeft:"auto",
     marginTop:-15
   }
 });

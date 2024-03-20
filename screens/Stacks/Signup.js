@@ -1,4 +1,4 @@
-import { Keyboard, StatusBar } from "react-native";
+import { Dimensions, Keyboard, StatusBar } from "react-native";
 import {
   StyleSheet,
   View,
@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import Buttons from "../../component/Buttons";
 import axios from "axios";
 import API from "../../constant/API";
+const {width,height}=Dimensions.get("screen")
 
 const Signup = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
@@ -77,17 +78,18 @@ const Signup = ({ navigation }) => {
         <Text style={styles.accTxt1}>
           Already have an account?
          <Text style={styles.accTxt2} onPress={()=> {
-          navigation.navigate("Login", { Email, Username1, Password });
+          navigation.navigate("Login");
          }}> Log in</Text>
         </Text>
+    
       </View>
       <Buttons
         onPress={NavigateToLogin}
         Btn="Sign up"
         disabled={loading || Email === "" ||
-      Password === "" ||
-      Username1 === "" ||
-      ConPassword === "" || Password !== ConPassword}
+          Password === "" ||
+          Username1 === "" ||
+          ConPassword === "" || Password !== ConPassword}
         loading={loading}
         width={200}
       />
@@ -105,42 +107,21 @@ const styles = StyleSheet.create({
   },
   Circle1: {
     backgroundColor: "#470440",
-    height: 440,
-    width: 440,
-    borderRadius: 600,
-    top: -200,
-    //zIndex: 3,
-  },
-  dont: {
-    paddingTop: 40,
+    height:height/4,
+    width: width,
+    borderBottomLeftRadius:300,
+    borderBottomRightRadius:300,
+    justifyContent:"center",
+    alignItems:"center",
+    marginBottom:50
   },
   mainBody: {
-    top: -140,
+    flex:1,
     alignItems: "center",
-  },
-  login: {
-    color: "#470440",
-  },
-  button: {
-    width: 200,
-    height: 58,
-    backgroundColor: "#470440",
-    borderRadius: 30,
-    borderWidth: 1,
-    borderColor: "black",
-    bottom: -50,
-  },
-  btnTxt: {
-    position: "absolute",
-    color: "white",
-    paddingVertical: 18,
-    paddingHorizontal: 75,
   },
   signUpTxt: {
     fontSize: 50,
     color: "white",
-    textAlign: "center",
-    bottom: -330,
     fontFamily:"Lato",
     fontWeight:"600"
   },

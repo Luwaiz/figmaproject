@@ -4,14 +4,14 @@ import React, { useState } from "react";
 const Buttons = ({ width,Btn,onPress,disabled=false,loading=false, ...props }) => {
 
   return (
-    <TouchableOpacity style={{ position:"absolute",
+    <TouchableOpacity style={{ 
     height: 58,
     width,
     backgroundColor: "#470440",
     borderRadius: 30,
     borderWidth: 1,
+    marginBottom:20,
     borderColor: "black",
-    bottom:20,
     alignItems:"center",
     justifyContent:"center"
     }} onPress={onPress} disabled={disabled} {...props} >
@@ -21,7 +21,6 @@ const Buttons = ({ width,Btn,onPress,disabled=false,loading=false, ...props }) =
 };
 const styles = StyleSheet.create({
       btnTxt: {
-      
         color: "white",
         paddingVertical: 18,
         alignSelf:"center"

@@ -54,7 +54,7 @@ const SearchPage = ({navigation}) => {
       </View>
       {loading? (<View>
         <ActivityIndicator style={{justifyContent:"center",alignSelf:"center"}} size={"large"} color={"#470440"}/>
-      </View>):(<View><SearchFilter data={data} searcher={searcher} setSearcher={setSearcher} navigation={navigation}/></View>)}
+      </View>):(<View style={{flex:1}}><SearchFilter data={data} searcher={searcher} setSearcher={setSearcher} navigation={navigation}/></View>)}
       
     </View>
   );
