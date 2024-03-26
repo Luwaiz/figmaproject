@@ -11,26 +11,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const App=()=> {
   const isLoadingComplete=UseCachedResources();
-  const [loading,setLoading]=useState(true)
-  const [onBoarding,setOnBoarding]=useState(false)
-
-  const GetItem = async()=>{
-    try{
-       const value= await AsyncStorage.getItem("key")
-       if(value !==null){
-        setOnBoarding(true)
-       }
-    }
-    catch(e){
-        console.log(e)
-    }
-    finally{
-      setLoading(false)
-    }
-}
- useEffect(()=>{
-    GetItem()
- },[])
 
   if(!isLoadingComplete){
     return null;
@@ -38,20 +18,11 @@ const App=()=> {
   return(
     <SafeAreaProvider>
     <ContextProvider>
-    {loading? null:onBoarding?<Navigation/>:<OnBoard/>}
+    <Navigation/>
     <StatusBar/>
     </ContextProvider>
     </SafeAreaProvider>
   )};
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center'
-    //justifyContent: 'center',
-  }});
-
 
 export default App;
