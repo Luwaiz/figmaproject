@@ -37,9 +37,6 @@ const Login = ({ navigation}) => {
       context.setToken(response?.data?.result?.access_token)
       if(context.setToken===""){
         context.setLoggedIn(false)
-      }else if(context.setToken!=="" && context.email==="Splax@gmail.com"){
-        context.setLoggedIn(true)
-        navigation.navigate("AdminPage")
       }else{
         context.setLoggedIn(true)
         navigation.navigate("HomePage",{

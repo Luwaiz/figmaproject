@@ -10,7 +10,6 @@ const Buttons = ({ width,Btn,onPress,disabled=false,loading=false, ...props }) =
     backgroundColor: "#470440",
     borderRadius: 30,
     borderWidth: 1,
-    marginBottom:20,
     borderColor: "black",
     alignItems:"center",
     justifyContent:"center"

@@ -2,21 +2,41 @@ import { Dimensions, FlatList, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import slides from '../../component/slides'
 import Buttons from '../../component/Buttons'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useNavigation } from '@react-navigation/native'
 const {width,height}=Dimensions.get("screen")
 
-const OnBoard = ({navigation}) => {
+
+const OnBoard = () => {
   const [currentId,setCurrentId]=useState(0)
-  const ItemViewed = useRef(({ViewedItem})=>{
-      setCurrentId(ViewedItem[0].index)
-      console.log(currentId)
-  }).current
-  const handleNavigation=()=>{
-      navigation.navigate("Signup")
+  const updateIndex=(e)=>{
+    //console.log(e)
+    const offsetX= e.nativeEvent.contentOffset.x
+    console.log(offsetX)
+    const currentIndex= Math.round(offsetX/width)
+    console.log(currentIndex)
+    setCurrentId(currentIndex)
+  }
+  const Footing=()=>{
+    
+    
+    return(
+      <View style={styles.footing}>
+        <View style={{alignItems:"center",flexDirection:"row", marginBottom:20}}>
+      {slides.map((_,index)=>(
+          <View style={[styles.indicator,currentId===index && {backgroundColor:"#470440",width:25}]} key={index}/>
+      ))}
+      </View>
+  
+        
+        <Buttons width={300} Btn={"Next"}/>
+      </View>
+    )
   }
   return (
     <View style={styles.container}>
       <FlatList
-        ItemViewed={ItemViewed}
+      onMomentumScrollEnd={updateIndex}
         data={slides}
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -30,7 +50,7 @@ const OnBoard = ({navigation}) => {
               <Text style={styles.head}>{item.heading}</Text>
               <Text style={styles.subHead}>{item.subHeading}</Text>
               </View>
-              <Buttons width={300} Btn={"Next"}  onPress={item.id===3? handleNavigation:null}/>
+              <Footing/>
             </View>
           )
         }}
@@ -48,20 +68,21 @@ const styles = StyleSheet.create({
   },
   page:{
     backgroundColor:"white",
-    flex:1,
     width:width,
     height:height,
     justifyContent:'center',
     alignItems:"center"
   },
   imagery:{
-    flex:0.66,
+    height:height*0.67,
     justifyContent:"center",
     alignItems:"center",
   },
   texts:{
-    flex:0.3,
-    alignItems:"center"
+    height:height*0.13,
+    alignItems:"center",
+   
+    justifyContent:"center"
   },
   head:{
     fontSize:26,
@@ -75,5 +96,19 @@ const styles = StyleSheet.create({
     color:"black",
     marginTop:40,
     textAlign:"center",
+  },
+  indicator:{
+    backgroundColor:"#635D5D",
+    height:7,
+    width:7,
+    marginHorizontal:3,
+    borderRadius:10
+  },
+  footing:{
+    alignItems:"center",
+    justifyContent:"center",
+    height:height*0.2,
+    width:width,
+    
   }
 })

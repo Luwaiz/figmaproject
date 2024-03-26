@@ -29,9 +29,9 @@ import OnBoard from '../screens/Stacks/OnBoard.js';
 
 const Stack=createNativeStackNavigator()
 const Tab=createBottomTabNavigator()
-
 const Navigation=()=> {
   const context = contexter()
+
   return (
     <NavigationContainer>
     {context?.loggedIn===false? (<LoggedOutScreen/>):(<LoggedInScreen/>)}
@@ -39,15 +39,16 @@ const Navigation=()=> {
   );
 }
 
-
 function LoggedOutScreen(){
+
     return(
-        <Stack.Navigator initialRouteName='OnBoard'>
-        <Stack.Screen name='OnBoard' component={OnBoard} options={{headerShown:false}}/>
-        <Stack.Screen name='Signup' component={Signup} options={{headerShown:false}}/>
-        <Stack.Screen name='Login' component={Login} options={{headerShown:false}}/>
-        </Stack.Navigator>
+    <Stack.Navigator screenOptions={{headerShown:false}} initialRouteName='Login'>
+      <Stack.Screen name='OnBoard' component={OnBoard}/>
+      <Stack.Screen name='Signup' component={Signup}/>
+      <Stack.Screen name='Login' component={Login} />
+    </Stack.Navigator>
     )
+   
 }
 
 function LoggedInScreen(){
