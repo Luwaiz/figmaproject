@@ -63,7 +63,7 @@ const LandingPage = ({ route, CatImage, CatName,navigation, ...props }) => {
   };
 
   useEffect(() => {
-    getUser();
+    navigation.addListener("focus",getUser())
   }, []);
 
   return (

@@ -14,7 +14,7 @@ const {width, height}=Dimensions.get("screen")
 const TextInputBox = ({ secureTextEntry,keyboardType,onChangeText,placeholder,passwordRules,password,...props}) => {
   const [hidePassword, setHidePassword] = React.useState(!password);
   return (
-    <View style={styles.pace}>
+    <View style={styles.inputBox}>
     <TextInput
       style={styles.input1}
       placeholder={placeholder}
@@ -28,20 +28,19 @@ const TextInputBox = ({ secureTextEntry,keyboardType,onChangeText,placeholder,pa
     />
     {password && (<TouchableOpacity onPress={()=>{
       setHidePassword(!hidePassword)
-    }}>{hidePassword?(<FontAwesome name="eye" size={24} color="black" />):(<FontAwesome name="eye-slash" size={24} color="black" />)}</TouchableOpacity>)}
+    }}>{hidePassword?(<FontAwesome style={styles.icon} name="eye" size={24} color="black" />):(<FontAwesome style={styles.icon} name="eye-slash" size={24} color="black" />)}</TouchableOpacity>)}
     
   </View>
   )
 }
 
 const styles = StyleSheet.create({
-    pace: {
-  
+    inputBox: {
         zIndex: 2,
         flexDirection:"row",
         alignItems:"center",
         borderWidth: 0.5,
-        height: 55,
+        height: 50,
         width: width-30,
         paddingHorizontal: 20,
         borderRadius: 15,
@@ -51,7 +50,7 @@ const styles = StyleSheet.create({
         marginBottom:30
       },
       input1: {
-        width:300
+        width:"95%"
       },
 })
 export default TextInputBox

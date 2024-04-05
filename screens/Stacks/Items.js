@@ -148,18 +148,13 @@ useEffect(()=>{
       </View>
 
 
-      <Buttons
-        Btn={
+      <TouchableOpacity onPress={NavigateToCartPage}>
           <View
             style={{flexDirection: "row"}}>
             <Text style={{ color: "white" }}>Add to cart   </Text>
             <FontAwesome5 name="shopping-cart" size={20} color="white" />
           </View>
-        }
-        loading={loading}
-        onPress={NavigateToCartPage}
-        width={200}
-      />
+      </TouchableOpacity>
     </View>
   );
 };

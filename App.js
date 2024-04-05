@@ -8,6 +8,7 @@ import { ContextProvider } from './hooks/provider';
 import OnBoard from './screens/Stacks/OnBoard';
 import Login from './screens/Stacks/Login';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Googleui from './testrun/googleui';
 
 const App=()=> {
   const isLoadingComplete=UseCachedResources();
@@ -18,7 +19,7 @@ const App=()=> {
   return(
     <SafeAreaProvider>
     <ContextProvider>
-    <Navigation/>
+    <Googleui/>
     <StatusBar/>
     </ContextProvider>
     </SafeAreaProvider>
