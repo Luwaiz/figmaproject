@@ -40,7 +40,7 @@ export default function () {
     <GoogleSigninButton
       size={GoogleSigninButton.Size.Wide}
       color={GoogleSigninButton.Color.Dark}
-      onPress={this._signIn}
+      onPress={signIn}
     />
   );
 }
